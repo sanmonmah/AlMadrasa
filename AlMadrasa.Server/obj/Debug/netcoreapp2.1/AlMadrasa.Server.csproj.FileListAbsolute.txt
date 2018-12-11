@@ -18,3 +18,11 @@ D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Server\obj\De
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.csproj.CopyComplete
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.dll
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.pdb
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.csprojAssemblyReference.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.csproj.CoreCompileInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.RazorAssemblyInfo.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.RazorAssemblyInfo.cs
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.AssemblyInfoInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.AssemblyInfo.cs
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.dll
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Server\obj\Debug\netcoreapp2.1\AlMadrasa.Server.pdb

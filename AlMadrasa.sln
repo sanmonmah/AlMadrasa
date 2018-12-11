@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlMadrasa.Server", "AlMadrasa.Server\AlMadrasa.Server.csproj", "{1F81F637-27EB-40BA-AA19-8FC33B6B02B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlMadrasa.Server", "AlMadrasa.Server\AlMadrasa.Server.csproj", "{1F81F637-27EB-40BA-AA19-8FC33B6B02B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlMadrasa.Client", "AlMadrasa.Client\AlMadrasa.Client.csproj", "{3F3CC3B9-5DCE-4AC9-8EA8-9A154092E50B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlMadrasa.Client", "AlMadrasa.Client\AlMadrasa.Client.csproj", "{3F3CC3B9-5DCE-4AC9-8EA8-9A154092E50B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlMadrasa.Shared", "AlMadrasa.Shared\AlMadrasa.Shared.csproj", "{99BC3296-4A01-4BC4-9504-894FB914FCD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlMadrasa.Shared", "AlMadrasa.Shared\AlMadrasa.Shared.csproj", "{99BC3296-4A01-4BC4-9504-894FB914FCD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

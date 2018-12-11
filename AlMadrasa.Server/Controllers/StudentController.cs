@@ -18,7 +18,7 @@ namespace AlMadrasa.Server.Controllers
         [Route("api/Student/Index")]
         public IEnumerable<Student> Index()
         {
-            return objstudent.GetAllEmployees();
+            return objstudent.GetAllStudents();
         }
 
         [HttpPost]
@@ -55,11 +55,65 @@ namespace AlMadrasa.Server.Controllers
         {
             return objstudent.GetarClassData();
         }
+        [HttpPost]
+        [Route("api/arClass/Create")]
+        public void arClassCreate([FromBody] arClass stud)
+        {
+            objstudent.AddarClass(stud);
+        }
+
+        [HttpGet]
+        [Route("api/arClass/Details/{id}")]
+        public Student arClassDetails(string id)
+        {
+            return objstudent.GetarClassData(id);
+        }
+
+        [HttpPut]
+        [Route("api/arClass/Edit")]
+        public void arClassEdit([FromBody]arClass employee)
+        {
+            objstudent.UpdatearClass(employee);
+        }
+
+        [HttpDelete]
+        [Route("api/arClass/Delete/{id}")]
+        public void arClassDelete(string id)
+        {
+            objstudent.DeletearClass(id);
+        }
         [HttpGet]
         [Route("api/Student/GetqClasses")]
         public List<qClass> GetqClasses()
         {
             return objstudent.GetqClassData();
+        }
+        [HttpPost]
+        [Route("api/qClass/Create")]
+        public void qClassCreate([FromBody] qClass stud)
+        {
+            objstudent.AddqClass(stud);
+        }
+
+        [HttpGet]
+        [Route("api/qClass/Details/{id}")]
+        public Student qClassDetails(string id)
+        {
+            return objstudent.GetqClassData(id);
+        }
+
+        [HttpPut]
+        [Route("api/qClass/Edit")]
+        public void qClassEdit([FromBody]qClass employee)
+        {
+            objstudent.UpdateqClass(employee);
+        }
+
+        [HttpDelete]
+        [Route("api/qClass/Delete/{id}")]
+        public void qClassDelete(string id)
+        {
+            objstudent.DeleteqClass(id);
         }
     }
 }

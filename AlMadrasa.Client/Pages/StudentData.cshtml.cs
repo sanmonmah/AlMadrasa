@@ -9,6 +9,7 @@ using AlMadrasa.Shared.Models;
 
 namespace AlMadrasa.Client.Pages
 {
+    
     public class StudentDataModel : BlazorComponent
     {
         [Inject]
@@ -29,6 +30,7 @@ namespace AlMadrasa.Client.Pages
         {
             await GetStudent();
             await GetarClasses();
+            await GetqClasses();
         }
 
         protected async Task GetStudent()
@@ -39,6 +41,10 @@ namespace AlMadrasa.Client.Pages
         protected async Task GetarClasses()
         {
             arClassList = await Http.GetJsonAsync<List<arClass>>("api/Student/GetarClasses");
+        }
+        protected async Task GetqClasses()
+        {
+            qClassList = await Http.GetJsonAsync<List<qClass>>("api/Student/GetqClasses");
         }
 
         protected void AddStudent()

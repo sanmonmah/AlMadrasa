@@ -7,3 +7,12 @@ D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Shared\obj\De
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Shared\bin\Debug\netstandard2.0\AlMadrasa.Shared.pdb
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.dll
 D:\projects\CSharp\vscode\Blazor\IqraaProjects\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.pdb
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Debug\netstandard2.0\AlMadrasa.Shared.deps.json
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Debug\netstandard2.0\AlMadrasa.Shared.dll
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Debug\netstandard2.0\AlMadrasa.Shared.pdb
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.csprojAssemblyReference.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.csproj.CoreCompileInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.AssemblyInfoInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.AssemblyInfo.cs
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.dll
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Debug\netstandard2.0\AlMadrasa.Shared.pdb
