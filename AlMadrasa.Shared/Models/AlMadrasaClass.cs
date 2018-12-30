@@ -10,19 +10,34 @@ namespace AlMadrasa.Shared.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Note { get; set; }
+        public void copyFrom(arClass from)
+        {
+            Name=from.Name;
+        }
     }
     public class qClass
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Note { get; set; }
+       public void copyFrom(qClass from)
+        {
+            Name=from.Name;
+        }
+    }
+    public class Branche
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public void copyFrom(qClass from)
+        {
+            Name=from.Name;
+        }
     }
 
 }

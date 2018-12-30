@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>7.3</LangVersion>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlMadrasa.Shared\AlMadrasa.Shared.csproj" />
+    
   </ItemGroup>
 
 </Project>

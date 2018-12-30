@@ -1,0 +1,161 @@
+﻿@using AlMadrasa.Shared
+@page "/contributiondata"
+@inherits StudentDataModel
+
+<head>
+    
+    <style>
+    .my-form-group
+    {
+        margin: 2px 2px;
+    }
+    .my-control-label
+    {
+       display: inline-block;
+        margin-bottom: .1rem;
+        width: 30%;
+          
+    }
+    .my-form-control
+    {
+        width: 50%;
+        padding: 5px 10px;
+        margin: 8px 5px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;        
+    }
+   
+    
+    </style>
+</head>
+<h1>Studenten Data</h1>
+<h3>Die monatliche Beiträge</h3>
+
+<div>
+    <div style="float:left">
+        <button class="btn btn-primary" onclick="@AddMonth"><span class="oi oi-calendar" aria-hidden="true"></span>Add Month</button>
+    </div>
+
+</div>
+<br />
+
+@if (studList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <br />
+    <table class='my-table'>
+        <thead>
+            <tr>
+            <th nowrap>
+                <input style="width:50%" type='text' placeholder="Name search" bind=@searchstr/>   
+                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
+                <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )>🠩</button>
+               <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button>
+            </th>    
+             @foreach (var con in monthCalendarList)
+             {
+                <th>@con.Month   </th>    
+             }
+            </tr>         
+        </thead>
+        <tbody>
+            @foreach (var stud in studList)
+            {
+                <tr>
+                    <td>@stud.Name            </td>   
+                    @foreach (var mon in monthCalendarList)
+                    {
+                        @foreach (var con in contributionList)
+                        {
+                            if(con.StudentId==stud.Id && con.MonthID==mon.Id)
+                            {
+                               <td>                                     
+                                @if(con.Payed==1)
+                                {
+                                    <i style="color:green">OK</i> 
+                                    <button class="my-btn btn-info" onclick=@( () => SortDescending("name") )><span class="oi oi-thumb-down" aria-hidden="true"></span></button>
+                                }
+                                else
+                                {
+                                    <i style="color:red">NOK</i>
+                                    <button class="my-btn btn-info" onclick=@( () => SortDescending("name") )><span class="oi oi-thumb-up" aria-hidden="true"></span></button>
+                                }                                    
+                                
+                                
+                                </td>    
+                            }                            
+                        }
+                    }                      
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    if (isAddMonth)
+    {
+        <div style="overflow:auto;height:80%">
+        <div class="modal" tabindex="-1" style="display:block" role="dialog" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Neue Beitragsmonat</h3>
+                        <button type="button" class="close" onclick="@closeModal">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <form>
+                            <div class="form-group">
+                                <label for="Monat" class="control-label">Monat</label>
+                                <input for="Monat" class="form-control" bind="@month.Month" />
+                            </div>
+                           
+                        </form>
+                    </div>
+                    <div class="modal-footer" >
+                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveMonth())" data-dismiss="modal">Save</button>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>   
+    }
+
+    if (isDeleteMonth)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Month</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Do you want to delete this Month ??</h4>
+                        <table class="table">
+                            <tr>
+                                <td>Month</td>
+                                <td>@month.Month</td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteMonth(month.Id))" data-dismiss="modal">YES</button>
+                        <button class="btn btn-warning" onclick="@closeModal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}  
+
+
+
+@functions {
+    
+}

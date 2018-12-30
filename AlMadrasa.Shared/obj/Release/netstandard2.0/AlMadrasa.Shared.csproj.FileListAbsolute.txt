@@ -1,0 +1,9 @@
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Release\netstandard2.0\AlMadrasa.Shared.deps.json
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Release\netstandard2.0\AlMadrasa.Shared.dll
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\bin\Release\netstandard2.0\AlMadrasa.Shared.pdb
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.csprojAssemblyReference.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.csproj.CoreCompileInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.AssemblyInfoInputs.cache
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.AssemblyInfo.cs
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.dll
+D:\Projects\vscode\blazor\AlMadrasa\AlMadrasa.Shared\obj\Release\netstandard2.0\AlMadrasa.Shared.pdb

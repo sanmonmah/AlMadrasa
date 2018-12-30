@@ -1,23 +1,34 @@
 ﻿using MongoDB.Driver;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AlMadrasa.Shared.Models
 {
+    public class IqraaJsonDB
+    {
+        public List<Student> students {get;set;}
+        public List<arClass> arclasses {get;set;}
+        public List<qClass> qclasses {get;set;}
+    }
     public class IqraaDBContext
     {
         private readonly IMongoDatabase _mongoDatabase;
-
-        public IqraaDBContext()
+        private string user="";
+        private string pwd="";
+        public IqraaDBContext( )
         {
-           // var client = new MongoClient("mongodb://localhost:27017");
-           // _mongoDatabase = client.GetDatabase("EmployeeDB");
-           // var client = new MongoClient("mongodb://moneer1:moneer1@moneercl-shard-00-00-rc39g.mongodb.net:27017,moneercl-shard-00-01-rc39g.mongodb.net:27017,moneercl-shard-00-02-rc39g.mongodb.net:27017/test?ssl=true&replicaSet=MoneerCL-shard-0&authSource=admin&retryWrites=true");
-           // _mongoDatabase = client.GetDatabase("EmployeeDB");
-           var client = new MongoClient("mongodb+srv://moneer1:moneer1@moneercl-rc39g.mongodb.net/test?retryWrites=true");
-            _mongoDatabase = client.GetDatabase("Iqraa");
+             var client = new MongoClient("mongodb://localhost:27017");
+             _mongoDatabase = client.GetDatabase("IqraaDB");
+            // var client = new MongoClient("mongodb://moneer1:moneer1@moneercl-shard-00-00-rc39g.mongodb.net:27017,moneercl-shard-00-01-rc39g.mongodb.net:27017,moneercl-shard-00-02-rc39g.mongodb.net:27017/test?ssl=true&replicaSet=MoneerCL-shard-0&authSource=admin&retryWrites=true");
+            // _mongoDatabase = client.GetDatabase("EmployeeDB");
             
+        //    var client = new MongoClient("mongodb+srv://moneer1:moneer1@moneercl-rc39g.mongodb.net/test?retryWrites=true");
+        //     _mongoDatabase = client.GetDatabase("Iqraa");
+           
+           //var col= _mongoDatabase.ListCollectionNames().ToList();
         }
 
         public IMongoCollection<Student> StudentRecord
@@ -25,8 +36,10 @@ namespace AlMadrasa.Shared.Models
             get
             {
                 //return _mongoDatabase.GetCollection<Employee>("EmployeeRecord");
-                 var coll= _mongoDatabase.GetCollection<Student>("Students");
-                 return coll;
+                var coll= _mongoDatabase.GetCollection<Student>("Students");
+                return coll;
+                
+                
             }
         }
 
@@ -44,6 +57,115 @@ namespace AlMadrasa.Shared.Models
             {
                 var coll = _mongoDatabase.GetCollection<qClass>("qClasses");
                 return coll;
+            }
+        }
+        public IMongoCollection<Branche> brancheRecord
+        {
+            get
+            {
+                var coll = _mongoDatabase.GetCollection<Branche>("Branches");
+                return coll;
+            }
+        }
+        public IMongoCollection<MonthCalendar> monthCalendarRecord
+        {
+            get
+            {
+                var coll = _mongoDatabase.GetCollection<MonthCalendar>("MonthCalendar");
+                return coll;
+            }
+        }
+        public IMongoCollection<Contribution> contributionRecord
+        {
+            get
+            {
+                var coll = _mongoDatabase.GetCollection<Contribution>("Contributions");
+                return coll;
+            }
+        }
+    }
+    public class IqraaJsonDBContext
+    {
+        public IqraaJsonDB _jsonDatabase{get; set;}
+
+        public IqraaJsonDBContext()
+        {
+            _jsonDatabase=new IqraaJsonDB();
+            _jsonDatabase.students=new List<Student>();
+            _jsonDatabase.arclasses=new List<arClass>();
+            _jsonDatabase.qclasses=new List<qClass>();
+            int i;
+            for(i=0;i<5;i++)
+            {
+                _jsonDatabase.students.Add(new Student(){Name="Student"+i,Id=(i+1).ToString()});
+            }
+            for(i=0;i<5;i++)
+            {
+                _jsonDatabase.arclasses.Add(new arClass(){Name="arclass"+i});
+            }
+            for(i=0;i<5;i++)
+            {
+                _jsonDatabase.qclasses.Add(new qClass(){Name="qclass"+i});
+            }
+           
+            
+        }
+        public void LoadDB2Json()
+        {
+             using(StreamReader sr = new StreamReader("./students.json"))
+            {
+                 _jsonDatabase.students  = JsonConvert.DeserializeObject<List<Student>>(sr.ReadToEnd());                
+            }
+            using(StreamReader sr = new StreamReader("./arclasses.json"))
+            {
+                 _jsonDatabase.arclasses  = JsonConvert.DeserializeObject<List<arClass>>(sr.ReadToEnd());                
+            }
+            using(StreamReader sr = new StreamReader("./aqclasses.json"))
+            {
+                 _jsonDatabase.qclasses  = JsonConvert.DeserializeObject<List<qClass>>(sr.ReadToEnd());                
+            }
+        }
+        public List<Student> StudentRecord
+        {
+            get
+            {
+                return _jsonDatabase.students;
+            }
+        }
+
+        public List<arClass> arClassRecord
+        {
+            get
+            {
+                return _jsonDatabase.arclasses;
+            }
+        }
+        public List<qClass> qClassRecord
+        {
+            get
+            {                
+                return _jsonDatabase.qclasses;
+            }
+        }
+        public void SaveDB2Json()
+        {
+            using (StreamWriter file = File.CreateText(@"./students.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                //serialize object directly into file stream
+                serializer.Serialize(file, _jsonDatabase.students);
+            }
+            using (StreamWriter file = File.CreateText(@"./arclasses.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                //serialize object directly into file stream
+                serializer.Serialize(file, _jsonDatabase.arclasses);
+            }
+            using (StreamWriter file = File.CreateText(@"./qclasses.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                //serialize object directly into file stream
+                serializer.Serialize(file, _jsonDatabase.qclasses);
             }
         }
     }

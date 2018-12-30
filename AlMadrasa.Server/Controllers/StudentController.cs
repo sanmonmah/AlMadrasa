@@ -13,7 +13,16 @@ namespace AlMadrasa.Server.Controllers
     public class StudentController : Controller
     {
         StudentDataAccessLayer objstudent = new StudentDataAccessLayer();
-
+        
+        // [HttpPost]
+        // [Route("api/Student/Edit")]
+        // public void Save2Json([FromBody] bool save)
+        // {
+        //     if(save)
+        //     objstudent.Save2Json();
+        //     else
+        //     objstudent.Load2Json();
+        // }
         [HttpGet]
         [Route("api/Student/Index")]
         public IEnumerable<Student> Index()
@@ -50,7 +59,7 @@ namespace AlMadrasa.Server.Controllers
         }
 
         [HttpGet]
-        [Route("api/Student/GetarClasses")]
+        [Route("api/arClass/GetarClasses")]
         public List<arClass> GetarClasses()
         {
             return objstudent.GetarClassData();
@@ -64,7 +73,7 @@ namespace AlMadrasa.Server.Controllers
 
         [HttpGet]
         [Route("api/arClass/Details/{id}")]
-        public Student arClassDetails(string id)
+        public arClass arClassDetails(string id)
         {
             return objstudent.GetarClassData(id);
         }
@@ -97,7 +106,7 @@ namespace AlMadrasa.Server.Controllers
 
         [HttpGet]
         [Route("api/qClass/Details/{id}")]
-        public Student qClassDetails(string id)
+        public qClass qClassDetails(string id)
         {
             return objstudent.GetqClassData(id);
         }
@@ -115,5 +124,54 @@ namespace AlMadrasa.Server.Controllers
         {
             objstudent.DeleteqClass(id);
         }
+
+        [HttpGet]
+        [Route("api/Student/GetContributions")]
+        public IEnumerable<Contribution> GetContributions()
+        {
+            return objstudent.GetContributions();
+        }
+        [HttpGet]
+        [Route("api/Student/GetMonthCalendar")]
+        public IEnumerable<MonthCalendar> GetMonthCalendar()
+        {
+            return objstudent.GetMonthCalendar();
+        }
+        [HttpGet]
+        [Route("api/Student/GetBranches")]
+        public IEnumerable<Branche> GetBranches()
+        {
+            return objstudent.GetBranches();
+        }
+
+        /// MonthCalendar
+        [HttpPost]
+        [Route("api/Month/Create")]
+        public void MonthCreate([FromBody] MonthCalendar mon)
+        {
+            objstudent.AddMonth(mon);
+        }
+
+        [HttpGet]
+        [Route("api/Month/Details/{id}")]
+        public MonthCalendar MonthDetails(string id)
+        {
+            return objstudent.GetMonthData(id);
+        }
+
+        [HttpPut]
+        [Route("api/Month/Edit")]
+        public void MonthEdit([FromBody]MonthCalendar mon)
+        {
+            objstudent.UpdateMonth(mon);
+        }
+
+        [HttpDelete]
+        [Route("api/Month/Delete/{id}")]
+        public void MonthDelete(string id)
+        {
+            objstudent.DeleteMonth(id);
+        }
+
     }
 }

@@ -32,7 +32,7 @@ namespace AlMadrasa.Client.Pages
 
             protected async Task GetarClasses()
             {
-                arClassList = await Http.GetJsonAsync<List<arClass>>("api/Student/GetarClasses");
+                arClassList = await Http.GetJsonAsync<List<arClass>>("api/arClass/GetarClasses");
             }
 
             protected void AddarClass()

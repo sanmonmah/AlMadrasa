@@ -1392,10 +1392,11 @@
   },
   "libraries": {
     "DnsClient/1.0.7": {
-      "sha512": "i6Imdyz+dvljMtQh1QtjMzguLEFFJCilecHiaRPIbNX4gK3zluf/3OQWD1XbVy5PXf1u394x5ImB+uu7DNMS1w==",
+      "sha512": "f3k5ufhUSL658fy/ac1mReqRIr0jGMyOJFvBqJ+7cASq01NIysYbrrRDjboYKAGrd0Y2mc1A749uQvT8vAA91A==",
       "type": "package",
       "path": "dnsclient/1.0.7",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "dnsclient.1.0.7.nupkg.sha512",
         "dnsclient.nuspec",
@@ -1496,7 +1497,7 @@
       ]
     },
     "MongoDB.Bson/2.7.2": {
-      "sha512": "pfcXg9leEY39T1A+B69k0yRvWDDiYa1kSc97RwHRuDWQawYkgwq2F3Xbj8lVQnNohDvV1E+7ZgszAlbA91Tl3w==",
+      "sha512": "BThOa3NUgjTbds9QpcM5Lg/bnA0tRukPV3QX8eTV2xuNidF5rA4E71qJhRZcqmFDTmbhmsU68yQkn5DmNo4Atg==",
       "type": "package",
       "path": "mongodb.bson/2.7.2",
       "files": [
@@ -1512,7 +1513,7 @@
       ]
     },
     "MongoDB.Driver/2.7.2": {
-      "sha512": "m7Fgt6okctvx4CGne0vgH8CqFEUO4T+LHYpFNsylFQASgX03DKCaFwp+BGmCR/0IfZVWGwO2zdGRq2Yv8/PNAg==",
+      "sha512": "3Jpxkic3K+x65ZoBwbUyafoob2t/pq9IB0S+QL1Nlwitbc+TGQXNG7GICexfvO2lW1uPCzca2ddCAzVP7u6YAA==",
       "type": "package",
       "path": "mongodb.driver/2.7.2",
       "files": [
@@ -1528,7 +1529,7 @@
       ]
     },
     "MongoDB.Driver.Core/2.7.2": {
-      "sha512": "TxMK++cPLQ78DKxhEhWxuseTJUuUaoQsyykedXeR9c9yjuniwIUpNCT0c4kJb60pxZK8S2pfH++0OTRcrpfhlA==",
+      "sha512": "6hYwYhP9kcaiFgNyqcvNo7ORyFOTHKHp1OT+Z1OniupmwQ3LH5ch0jtLhRdCQAxDa9v2Q7wfB3OvHGouo6c4aA==",
       "type": "package",
       "path": "mongodb.driver.core/2.7.2",
       "files": [
@@ -1672,7 +1673,7 @@
       ]
     },
     "Newtonsoft.Json/12.0.1": {
-      "sha512": "jmVyoEyk0In8r+AObYQyFKVFm7uSRzE0XSHSbEtBJcZDMV6DqJoyB4FLcHwprPVhAh826so0db3DIKXVnpGoPA==",
+      "sha512": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
       "type": "package",
       "path": "newtonsoft.json/12.0.1",
       "files": [
@@ -2286,7 +2287,7 @@
       ]
     },
     "System.Diagnostics.TraceSource/4.0.0": {
-      "sha512": "6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA==",
+      "sha512": "q5bGzzvXVi+dIMiPWRhXZV7r+Os3TEOuRW5LHsAUDGpqJHol8XiLokVpsgAfPqHHNkyx1bbv5lRZqRkRrGZKxQ==",
       "type": "package",
       "path": "system.diagnostics.tracesource/4.0.0",
       "files": [
@@ -3030,10 +3031,11 @@
       ]
     },
     "System.Net.NetworkInformation/4.3.0": {
-      "sha512": "MKLDZXuBZOS348egaxkMgwSUHIIhykVf0pudpfSdzjKmkRpVCzqkpysPHHp8HfckYAhuXRM+UgxWPgFTHF8Trg==",
+      "sha512": "zNVmWVry0pAu7lcrRBhwwU96WUdbsrGL3azyzsbXmVNptae1+Za+UgOe9Z6s8iaWhPn7/l4wQqhC56HZWq7tkg==",
       "type": "package",
       "path": "system.net.networkinformation/4.3.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -4457,10 +4459,11 @@
       ]
     },
     "System.Security.SecureString/4.0.0": {
-      "sha512": "7TGOnj9Lr8ljCJbMHjZC34hEw3Z+zRPp7eNhLBg22mbSqO8gQMGLJ/vQkWv8HFYG0t2i53ZulKZ8NNho+jVK7Q==",
+      "sha512": "sqzq9GD6/b0yqPuMpgIKBuoLf4VKAj8oAfh4kXSzPaN6eoKY3hRi9C5L27uip25qlU+BGPfb0xh2Rmbwc4jFVA==",
       "type": "package",
       "path": "system.security.securestring/4.0.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
