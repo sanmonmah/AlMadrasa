@@ -16,16 +16,17 @@ namespace AlMadrasa.Shared.Models
     public class IqraaDBContext
     {
         private readonly IMongoDatabase _mongoDatabase;
-        private string user="";
-        private string pwd="";
-        public IqraaDBContext( )
+        
+        public IqraaDBContext( string connectstring="")
         {
-             var client = new MongoClient("mongodb://localhost:27017");
+            MongoClient client;
+            if(connectstring=="")
+                 client = new MongoClient("mongodb://localhost:27017");
+            else
+                 client = new MongoClient(connectstring);
              _mongoDatabase = client.GetDatabase("IqraaDB");
-            // var client = new MongoClient("mongodb://moneer1:moneer1@moneercl-shard-00-00-rc39g.mongodb.net:27017,moneercl-shard-00-01-rc39g.mongodb.net:27017,moneercl-shard-00-02-rc39g.mongodb.net:27017/test?ssl=true&replicaSet=MoneerCL-shard-0&authSource=admin&retryWrites=true");
-            // _mongoDatabase = client.GetDatabase("EmployeeDB");
             
-        //    var client = new MongoClient("mongodb+srv://moneer1:moneer1@moneercl-rc39g.mongodb.net/test?retryWrites=true");
+        //    var client = new MongoClient("mongodb+srv://user:pwd@moneercl-rc39g.mongodb.net/test?retryWrites=true");
         //     _mongoDatabase = client.GetDatabase("Iqraa");
            
            //var col= _mongoDatabase.ListCollectionNames().ToList();

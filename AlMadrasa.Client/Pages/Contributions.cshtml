@@ -30,12 +30,12 @@
     
     </style>
 </head>
-<h1>Studenten Data</h1>
-<h3>Die monatliche Beiträge</h3>
+<h1>Studenten Daten</h1>
+<h3>Die monatlichen Beiträge</h3>
 
 <div>
     <div style="float:left">
-        <button class="btn btn-primary" onclick="@AddMonth"><span class="oi oi-calendar" aria-hidden="true"></span>Add Month</button>
+        <button class="btn btn-primary" onclick="@AddMonth"><span class="oi oi-calendar" aria-hidden="true"></span>Monat+</button>
     </div>
 
 </div>
@@ -43,7 +43,9 @@
 
 @if (studList == null)
 {
+    <br />
     <p><em>Loading...</em></p>
+  
 }
 else
 {
@@ -55,11 +57,36 @@ else
                 <input style="width:50%" type='text' placeholder="Name search" bind=@searchstr/>   
                 <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
                 <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )>🠩</button>
-               <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button>
+                <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button>
             </th>    
-             @foreach (var con in monthCalendarList)
-             {
-                <th>@con.Month   </th>    
+             @if (monthCalendarList != null)
+            {   index=monthCalendarList.Count;
+                foreach (var mon in monthCalendarList)
+                {       
+                    <th>@mon.Month   
+                    <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
+                        
+                    @if(index--==1)
+                    {
+                        month.Id=null;
+                        var tok=mon.Month.Split('.');
+                        if(tok.Length==2)
+                        {
+                            int x=System.Convert.ToInt16(tok[0])+1;
+                            if(x==13)
+                            {
+                                x=1;
+                                int y=System.Convert.ToInt16(tok[1])+1;
+                                month.Month=x.ToString("00")+"."+y;
+                            }
+                            else
+                            {
+                                month.Month=x.ToString("00")+"."+tok[1];
+                            }
+                            <button class="my-btn btn-secondary" onclick=@( () => SaveMonth() )><span class="oi oi-plus" aria-hidden="true"></span></button>
+                        }
+                    }</th>
+                }
              }
             </tr>         
         </thead>
@@ -78,15 +105,13 @@ else
                                 @if(con.Payed==1)
                                 {
                                     <i style="color:green">OK</i> 
-                                    <button class="my-btn btn-info" onclick=@( () => SortDescending("name") )><span class="oi oi-thumb-down" aria-hidden="true"></span></button>
+                                    <button class="my-btn btn-info" onclick=@(async () => {con.Payed=0; await SaveContribution(con); })><span class="oi oi-thumb-up" aria-hidden="true"></span></button>
                                 }
                                 else
                                 {
                                     <i style="color:red">NOK</i>
-                                    <button class="my-btn btn-info" onclick=@( () => SortDescending("name") )><span class="oi oi-thumb-up" aria-hidden="true"></span></button>
-                                }                                    
-                                
-                                
+                                    <button class="my-btn btn-info" onclick=@( async () => { con.Payed=1; await SaveContribution(con);} )><span class="oi oi-thumb-down" aria-hidden="true"></span></button>
+                                }                                 
                                 </td>    
                             }                            
                         }
@@ -157,5 +182,5 @@ else
 
 
 @functions {
-    
+    int index=0;
 }

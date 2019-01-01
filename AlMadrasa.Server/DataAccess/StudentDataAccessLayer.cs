@@ -302,6 +302,9 @@ namespace AlMadrasa.Server.DataAccess
             try
             {
                 db.StudentRecord.InsertOne(stud);
+                List<MonthCalendar> list=db.monthCalendarRecord.Find(_ => true).ToList();
+                foreach(MonthCalendar mon in list)
+                    db.contributionRecord.InsertOne(new Contribution{StudentId=stud.Id, MonthID=mon.Id});
             }
             catch
             {
@@ -334,6 +337,8 @@ namespace AlMadrasa.Server.DataAccess
         {
             try
             {
+                List<MonthCalendar> mlist=db.monthCalendarRecord.Find(_ => true).ToList();
+                    if(mlist.Find((g) => g.Month==mon.Month)!=null) return;
                 db.monthCalendarRecord.InsertOne(mon);
                 List<Student> list=db.StudentRecord.Find(_ => true).ToList();
                 foreach(Student st in list)
@@ -344,6 +349,7 @@ namespace AlMadrasa.Server.DataAccess
                 throw;
             }
         }
+        
         //Get the details of a particular employee      
         public Student GetStudentData(string id, string Criteria="")
         {
@@ -492,6 +498,17 @@ namespace AlMadrasa.Server.DataAccess
                 throw;
             }
         }
+        public void UpdateContribution(Contribution con)
+        {
+            try
+            {
+                db.contributionRecord.ReplaceOne(filter: g => g.Id == con.Id, replacement: con);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         //To Delete the record of a particular employee      
         public void DeleteStudent(string id)
         {
@@ -500,7 +517,7 @@ namespace AlMadrasa.Server.DataAccess
                 FilterDefinition<Student> studentData = Builders<Student>.Filter.Eq("Id", id);
                 db.StudentRecord.DeleteOne(studentData);
                 FilterDefinition<Contribution> monfiltdef = Builders<Contribution>.Filter.Eq("StudentId", id);
-                db.contributionRecord.DeleteOne(monfiltdef);
+                db.contributionRecord.DeleteMany(monfiltdef);
             }
             catch
             {

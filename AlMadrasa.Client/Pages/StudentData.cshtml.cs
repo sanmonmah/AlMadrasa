@@ -14,6 +14,7 @@ namespace AlMadrasa.Client.Pages
     {
         [Inject]
         protected HttpClient Http { get; set; }
+        protected string Messages="";
         protected List<Student> studList;
         protected List<Student> allStudList;
         protected List<arClass> arClassList = new List<arClass>();
@@ -41,7 +42,7 @@ namespace AlMadrasa.Client.Pages
              await GetBranches();   
              await GetContributions();
              await GetMonthCalendar();    
-             searchstr="name";    
+             Messages="Data has been loaded successful";    
         }
         public string searchCriteria { get; set; }
         public string sortCriteria { get; set; }
@@ -90,10 +91,10 @@ namespace AlMadrasa.Client.Pages
             else
             {
                 foreach(Student st in allStudList)
-                    if(st.Name.Contains(searchstr))
+                    if(st.Name.ToUpper().Contains(searchstr.ToUpper()))
                         studList.Add(st);
             }   
-            searchstr=allStudList.Count.ToString()+","+studList.Count.ToString();          
+            Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
             //    studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
         }
         
@@ -241,7 +242,12 @@ namespace AlMadrasa.Client.Pages
                 await GetMonthCalendar();
                 await GetContributions();
             }
-
+            protected async Task SaveContribution(Contribution con)
+            {
+                await Http.SendJsonAsync(HttpMethod.Put, "api/Contribution/Edit", con);
+            }
+               
+            
             protected async Task DeleteMonthConfirm(string ID)
             {
                 month = await Http.GetJsonAsync<MonthCalendar>("/api/Month/Details/" + ID);

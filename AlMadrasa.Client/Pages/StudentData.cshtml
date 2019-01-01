@@ -29,8 +29,8 @@
     
     </style>
 </head>
-<h1>Student Data</h1>
-<h3>Iqraa registered student</h3>
+<h1>Alle Studenten</h1>
+<h3>Alle bei SKT e.V. registrierten Studenten</h3>
 <br />
 <div>
     <div style="float:left">
@@ -76,7 +76,7 @@ else
             </tr>
             <tr>
             <th >Name
-               <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )>🠩</button>
+               <button class="my-btn btn-primary" onclick=@( () => {SortAscending("name"); Messages="List has been sorted";} )>🠩</button>
                 <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button> 
             </th>    
            
@@ -282,3 +282,22 @@ else
     }
 }  
 
+@functions{
+    
+    void closeMessage()
+    {
+        Messages = "";
+    }
+}
+@if (Messages != "")
+{
+    <div id="outPopUp" style="position: absolute;   z-index: 15;  top: 50%;  left: 50%;  margin: -100px 0 0 -150px;  background: #f6cd2f;">
+       <div id="outPopUp" style="position: absolute;  width: 300px;  height: 248px;    background: #333;">
+            <span style="color:#ECF3F4;font-size:xx-large;display: inline-block;    margin: 10px 10px 0 0;   padding: 5px 10px ">
+                @Messages
+            </span>
+            <button class="btn btn-info" style="color:#ECF3F4;font-size:xx-large"  onclick="@closeMessage" >Ok</button>
+        </div>
+
+    </div>
+}

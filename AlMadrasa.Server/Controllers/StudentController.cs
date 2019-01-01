@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
 using System.Threading.Tasks;
 using AlMadrasa.Server.DataAccess;
 using AlMadrasa.Shared.Models;
@@ -32,6 +33,7 @@ namespace AlMadrasa.Server.Controllers
 
         [HttpPost]
         [Route("api/Student/Create")]
+        
         public void Create([FromBody] Student stud)
         {
             objstudent.AddStudent(stud);
@@ -46,16 +48,16 @@ namespace AlMadrasa.Server.Controllers
 
         [HttpPut]
         [Route("api/Student/Edit")]
-        public void Edit([FromBody]Student employee)
+        public void Edit([FromBody]Student stud)
         {
-            objstudent.UpdateStudent(employee);
+            objstudent.UpdateStudent(stud);
         }
 
         [HttpDelete]
         [Route("api/Student/Delete/{id}")]
         public void Delete(string id)
         {
-            objstudent.DeleteStudent(id);
+            objstudent.DeleteStudent(id);            
         }
 
         [HttpGet]
@@ -80,9 +82,9 @@ namespace AlMadrasa.Server.Controllers
 
         [HttpPut]
         [Route("api/arClass/Edit")]
-        public void arClassEdit([FromBody]arClass employee)
+        public void arClassEdit([FromBody]arClass arcls)
         {
-            objstudent.UpdatearClass(employee);
+            objstudent.UpdatearClass(arcls);
         }
 
         [HttpDelete]
@@ -108,14 +110,14 @@ namespace AlMadrasa.Server.Controllers
         [Route("api/qClass/Details/{id}")]
         public qClass qClassDetails(string id)
         {
-            return objstudent.GetqClassData(id);
+            return objstudent.GetqClassData(id);            
         }
 
         [HttpPut]
         [Route("api/qClass/Edit")]
-        public void qClassEdit([FromBody]qClass employee)
+        public void qClassEdit([FromBody]qClass qcls)
         {
-            objstudent.UpdateqClass(employee);
+            objstudent.UpdateqClass(qcls);
         }
 
         [HttpDelete]
@@ -172,6 +174,12 @@ namespace AlMadrasa.Server.Controllers
         {
             objstudent.DeleteMonth(id);
         }
-
+        
+        [HttpPut]
+        [Route("api/Contribution/Edit")]
+        public void ContributionEdit([FromBody]Contribution con)
+        {
+            objstudent.UpdateContribution(con);
+        }
     }
 }
