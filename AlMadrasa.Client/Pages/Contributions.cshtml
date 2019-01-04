@@ -44,13 +44,19 @@
 @if (studList == null)
 {
     <br />
-    <p><em>Loading...</em></p>
-  
+    <!-- <p><em>Loading...</em></p> -->
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
 }
 else
 {
     <br />
-    <table class='my-table'>
+    <table class='my-table'  >
         <thead>
             <tr>
             <th nowrap>
@@ -59,13 +65,14 @@ else
                 <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )>🠩</button>
                 <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button>
             </th>    
-             @if (monthCalendarList != null)
-            {   index=monthCalendarList.Count;
+            @if (monthCalendarList != null)
+            {   
+                index=monthCalendarList.Count;
                 foreach (var mon in monthCalendarList)
                 {       
                     <th>@mon.Month   
                     <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
-                        
+                    
                     @if(index--==1)
                     {
                         month.Id=null;
@@ -93,7 +100,12 @@ else
         <tbody>
             @foreach (var stud in studList)
             {
-                <tr>
+                var str="";
+                @if(index++%2==1)
+                {
+                    str="background:#444";
+                }                
+                <tr style=@str>
                     <td>@stud.Name            </td>   
                     @foreach (var mon in monthCalendarList)
                     {

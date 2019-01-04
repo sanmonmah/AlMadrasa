@@ -142,7 +142,9 @@ app {
         border: 1px solid #ccc;
         white-space:nowrap;
         padding: .25rem .25rem;
+        max-width: 80%;
     }
+    
 /*  */
     .spinner {
         margin: 100px auto;
@@ -152,7 +154,7 @@ app {
         font-size: 10px;
     }   
     .spinner > div {
-            background-color: #333;
+            background-color: rgb(46, 148, 68);
             height: 100%;
             width: 6px;
             display: inline-block;
