@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace AlMadrasa.Server
 {
+ 
     public class Program
     {
         public static void Main(string[] args)
@@ -17,6 +18,7 @@ namespace AlMadrasa.Server
                     .AddCommandLine(args)
                     .Build())
                 .UseStartup<Startup>()
+                //.UseUrls("http://localhost:60150/")
                 .Build();
     }
 }

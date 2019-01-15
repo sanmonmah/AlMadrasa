@@ -167,21 +167,20 @@ namespace AlMadrasa.Client.Pages
             await GetStudent();
         }
 
-        //arabic Class Methode
-           
+        //arabic Class Methode           
             protected arClass cls = new arClass();
             protected void AddarClass()
             {
                 cls = new arClass();
                 this.modalTitle = "Add arabic class";
-                this.isAdd = true;
+                this.isAddarClass = true;
             }
 
             protected async Task EditarClass(string ID)
             {
                 cls = await Http.GetJsonAsync<arClass>("/api/arClass/Details/" + ID);
                 this.modalTitle = "Edit arabic class";
-                this.isAdd = true;
+                this.isAddarClass = true;
             }
 
             protected async Task SavearClass()
@@ -195,21 +194,63 @@ namespace AlMadrasa.Client.Pages
                     await Http.SendJsonAsync(HttpMethod.Post, "/api/arClass/Create", cls);
 
                 }
-                this.isAdd = false;
+                this.isAddarClass = false;
                 await GetarClasses();
             }
 
             protected async Task DeletearClassConfirm(string ID)
             {
                 cls = await Http.GetJsonAsync<arClass>("/api/arClass/Details/" + ID);
-                this.isDelete = true;
+                this.isDeletearClass = true;
             }
             protected async Task DeletearClass(string ID)
             {
                 await Http.DeleteAsync("api/arClass/Delete/" + ID);
-                this.isDelete = false;
+                this.isDeletearClass = false;
                 await GetarClasses();
             }
+        //Quran Class Methode           
+            protected qClass qcls = new qClass();
+            protected void AddqClass()
+            {
+                qcls = new qClass();
+                this.modalTitle = "Add arabic class";
+                this.isAddqClass = true;
+            }
+
+            protected async Task EditqClass(string ID)
+            {
+                qcls = await Http.GetJsonAsync<qClass>("/api/qClass/Details/" + ID);
+                this.modalTitle = "Edit arabic class";
+                this.isAddqClass = true;
+            }
+
+            protected async Task SaveqClass()
+            {
+                if (qcls.Id != null)
+                {
+                    await Http.SendJsonAsync(HttpMethod.Put, "api/qClass/Edit", qcls);
+                }
+                else
+                {
+                    await Http.SendJsonAsync(HttpMethod.Post, "/api/qClass/Create", qcls);
+
+                }
+                this.isAddqClass = false;
+                await GetqClasses();
+            }
+
+            protected async Task DeleteqClassConfirm(string ID)
+            {
+                qcls = await Http.GetJsonAsync<qClass>("/api/qClass/Details/" + ID);
+                this.isDeleteqClass = true;
+            }
+            protected async Task DeleteqClass(string ID)
+            {
+                await Http.DeleteAsync("api/qClass/Delete/" + ID);
+                this.isDeleteqClass = false;
+                await GetqClasses();
+            }    
             //
         //Month Calendar Methode           
             protected MonthCalendar month = new MonthCalendar();
@@ -265,6 +306,10 @@ namespace AlMadrasa.Client.Pages
         {
             this.isAdd = false;
             this.isDelete = false;
+             this.isAddarClass = false;
+            this.isDeletearClass = false;
+             this.isAddqClass = false;
+            this.isDeleteqClass = false;
             this.isAddMonth = false;
             this.isDeleteMonth = false;
         }

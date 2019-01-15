@@ -1,39 +1,52 @@
-﻿@page "/arclassdata"
-@*@inherits StudentDataModel*@
+﻿
+@using AlMadrasa.Shared
+@page "/classdata"
+@inherits StudentDataModel
 
 <h1>Classes Data</h1>
 <h3>AlMadrasa registered calsses</h3>
 <br />
-@*<div>
-    <div style="float:left">
-        <button class="btn btn-primary" onclick="@AddarClass">Add arabic class</button>
+<div>
+    <div style="float:left">       
+        <div style="float:left">
+            <button class="btn btn-primary" onclick="@AddarClass"><span class="oi oi-flag" aria-hidden="true"></span>&emsp;Add Arabic Class</button>
+        </div>        
+        <div style="float:left; padding-left:30px">
+            <button class="btn btn-primary" onclick="@AddqClass"><span class="oi oi-flag" aria-hidden="true"></span>&ensp;Add Quran Class</button>
+        </div>
         
     </div>
 
 </div>
 <br />
 
-@if (arClassList == null)
+@if (arClassList == null || qClassList==null)
 {
-    <p><em>Loading...</em></p>
+    <!-- <p><em>Loading...</em></p> -->
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
 }
 else
 {
-    <h3>Arabic calsses</h3>
+    <br />
+    <h3>Arabisch-Klassen</h3>
     <table class='table'>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Notes</th>
-                <th>arClass</th>
+                <th>Name</th>                
+                <th>Bearbeiten</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var cls in arClassList)
             {
                 <tr>
-                    <td>@cls.Name</td>
-                    <td>@cls.Note</td>
+                    <td>@cls.Name</td>                  
 
                     <td>
                         <button class="btn btn-info" onclick="@(async () => await EditarClass(cls.Id))">Edit</button>
@@ -43,14 +56,38 @@ else
             }
         </tbody>
     </table>
+    <br/>
+    <div></div>
 
-    if (isAdd)
+    <h3>Quran-Klassen</h3>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>                
+                <th>Bearbeiten</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cls in qClassList)
+            {
+                <tr>
+                    <td>@cls.Name</td>                   
+                    <td>
+                        <button class="btn btn-info" onclick="@(async () => await EditqClass(cls.Id))">Edit</button>
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteqClassConfirm(cls.Id))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    if (isAddarClass)
     {
         <div class="modal" tabindex="-1" style="display:block" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">@modalTitle</h3>
+                        <h3 class="modal-title">Arabische Klasse hinzufügen</h3>
                         <button type="button" class="close" onclick="@closeModal">
                             <span aria-hidden="true">X</span>
                         </button>
@@ -71,23 +108,21 @@ else
             </div>
         </div>
     }
-
-    if (isDelete)
+    else if (isDeletearClass)
     {
         <div class="modal" tabindex="-1" style="display:block" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Delete Employee</h3>
+                        <h3 class="modal-title">Arabische Klasse löschen</h3>
                     </div>
                     <div class="modal-body">
-                        <h4>Do you want to delete this employee ??</h4>
+                        <h4>Möchtest du wirklich diese Klasse löschen?</h4>
                         <table class="table">
                             <tr>
                                 <td>Name</td>
                                 <td>@cls.Name</td>
-                            </tr>
-                           
+                            </tr>                           
                         </table>
                     </div>
                     <div class="modal-footer">
@@ -98,4 +133,56 @@ else
             </div>
         </div>
     }
-}*@  
+    else if (isAddqClass)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Quran Klasse hinzufügen</h3>
+                        <button type="button" class="close" onclick="@closeModal">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="Name" class="control-label">Name</label>
+                                <input for="Name" class="form-control" bind="@qcls.Name" />
+                            </div>
+                           
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveqClass())" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (isDeleteqClass)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Lösche Quran Klasse</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Möchtest du wirklich diese Klasse löschen??</h4>
+                        <table class="table">
+                            <tr>
+                                <td>Name</td>
+                                <td>@qcls.Name</td>
+                            </tr>                           
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteqClass(qcls.Id))" data-dismiss="modal">YES</button>
+                        <button class="btn btn-warning" onclick="@closeModal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+} 

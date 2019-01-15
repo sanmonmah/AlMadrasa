@@ -1,3 +1,13 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    },
+    "workbench.colorCustomizations": {
+        
+            "titleBar.activeBackground": "#177706cc",
+           // "titleBar.activeForeground":"#ffff00",        
+    },
+    
 }
