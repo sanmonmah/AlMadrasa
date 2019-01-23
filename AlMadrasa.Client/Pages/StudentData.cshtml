@@ -35,6 +35,7 @@
 <div>
     <div style="float:left">
         <button class="btn btn-primary" onclick="@AddStudent"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Add Student</button>
+        <button class="btn btn-primary" onclick="@DownloadToExcel"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Download</button>
     </div>
     
 
@@ -143,8 +144,9 @@ else
                     <td>@emp.Branch           </td>    
                     <td>@emp.Birthday         </td>    
                     <td>@emp.EntryDate        </td>    
-                    <td>@emp.arClass          </td>    
-                    <td>@emp.qClass           </td>    
+                   
+                    <td>@GetarClassfromList(emp.arClass)         </td>  
+                    <td>@GetqClassfromList(emp.qClass )          </td>    
                     <td>@emp.PhoneNr1         </td>    
                     <td>@emp.Gender           </td>    
                     <td>@emp.PostalCode       </td>    
@@ -202,9 +204,9 @@ else
                                 <label asp-for="arClass" class="my-control-label">Arabic Class</label>
                                 <select asp-for="arClass" class="form-control" bind="@stud.arClass">
                                     <option value="">-- Select arclass --</option>
-                                    @foreach (var city in arClassList)
+                                    @foreach (var ar in arClassList)
                                     {
-                                        <option value="@city.Name">@city.Name</option>
+                                        <option value="@ar.Id">@ar.Name</option>
                                     }
                                 </select>
                             </div>
@@ -212,9 +214,9 @@ else
                                 <label asp-for="qClass" class="my-control-label">Quran Class</label>
                                 <select asp-for="qClass" class="form-control" bind="@stud.qClass">
                                     <option value="">-- Select qclass --</option>
-                                    @foreach (var city in qClassList)
+                                    @foreach (var ql in qClassList)
                                     {
-                                        <option value="@city.Name">@city.Name</option>
+                                        <option value="@ql.Id">@ql.Name</option>
                                     }
                                 </select>
                             </div>
@@ -302,6 +304,8 @@ else
     {
         Messages = "";
     }
+    
+
 }
 @if (Messages != "")
 {

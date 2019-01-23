@@ -6,6 +6,8 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using AlMadrasa.Shared.Models;
+using OfficeOpenXml;
+using System.IO;
 
 namespace AlMadrasa.Client.Pages
 {
@@ -54,11 +56,36 @@ namespace AlMadrasa.Client.Pages
                     studList.Sort((x, y) => x.Name.CompareTo(y.Name)); 
                 break;
                 case "birthdate":
-                    studList.Sort((x, y) => x.Birthday.CompareTo(y.Name)); 
+                    studList.Sort((x, y) => x.Birthday.CompareTo(y.Birthday)); 
                 break;
                 case "entrydate":
-                    studList.Sort((x, y) => x.EntryDate.CompareTo(y.Name)); 
+                    studList.Sort((x, y) => x.EntryDate.CompareTo(y.EntryDate)); 
                 break;
+                case "city":
+                    studList.Sort((x, y) => x.City.CompareTo(y.City)); 
+                break;
+                case "telefon":
+                    studList.Sort((x, y) => x.PhoneNr1.CompareTo(y.PhoneNr1)); 
+                break;
+                case "gender":
+                    studList.Sort((x, y) => x.Gender.CompareTo(y.Gender)); 
+                break;
+                case "arclass":
+                    studList.Sort((x, y) => x.arClass.CompareTo(y.arClass)); 
+                break;
+                case "qclass":
+                    studList.Sort((x, y) => x.qClass.CompareTo(y.qClass)); 
+                break;
+                case "contribution":
+                    studList.Sort((x, y) => x.MonthContribution.CompareTo(y.MonthContribution)); 
+                break;
+                case "branch":
+                    studList.Sort((x, y) => x.Branch.CompareTo(y.Branch)); 
+                break;
+                case "postalcode":
+                    studList.Sort((x, y) => x.PostalCode.CompareTo(y.PostalCode)); 
+                break;
+
             }
                     
         }
@@ -70,10 +97,34 @@ namespace AlMadrasa.Client.Pages
                     studList.Sort((x, y) => y.Name.CompareTo(x.Name));
                 break;
                 case "birthdate":
-                    studList.Sort((x, y) => y.Birthday.CompareTo(x.Name)); 
+                    studList.Sort((x, y) => y.Birthday.CompareTo(x.Birthday)); 
                 break;
                 case "entrydate":
-                    studList.Sort((x, y) => y.EntryDate.CompareTo(x.Name)); 
+                    studList.Sort((x, y) => y.EntryDate.CompareTo(x.EntryDate)); 
+                break;
+                case "city":
+                    studList.Sort((x, y) => y.City.CompareTo(x.City)); 
+                break;
+                case "telefon":
+                    studList.Sort((x, y) => y.PhoneNr1.CompareTo(x.PhoneNr1)); 
+                break;
+                case "gender":
+                    studList.Sort((x, y) => y.Gender.CompareTo(x.Gender)); 
+                break;
+                case "arclass":
+                    studList.Sort((x, y) => y.arClass.CompareTo(x.arClass)); 
+                break;
+                case "qclass":
+                    studList.Sort((x, y) => y.qClass.CompareTo(x.qClass)); 
+                break;
+                case "contribution":
+                    studList.Sort((x, y) => y.MonthContribution.CompareTo(y.MonthContribution)); 
+                break;
+                case "branch":
+                    studList.Sort((x, y) => y.Branch.CompareTo(x.Branch)); 
+                break;
+                case "postalcode":
+                    studList.Sort((x, y) => y.PostalCode.CompareTo(x.PostalCode)); 
                 break;
             }
                      
@@ -302,6 +353,37 @@ namespace AlMadrasa.Client.Pages
                 await GetContributions();
             }
             //    
+
+           protected string GetarClassfromList(string id)
+            {
+               arClass xx= arClassList.FirstOrDefault(x => x.Id==id);
+               return (xx==null) ? "":xx.Name;
+               
+            }
+            protected string GetqClassfromList(string id)
+            {
+               qClass xx= qClassList.FirstOrDefault(x => x.Id==id);
+               return (xx==null) ? "":xx.Name;
+               
+            }
+            void ExportToExcel()
+            {
+                using (ExcelPackage pkg = new ExcelPackage())
+                {
+                    
+                    pkg.Workbook.Worksheets.Add("StudentList");
+                    var headerRow = new List<string[]>()
+                    {
+                        new string[] { "Id", "FirstName", "LastName",  }
+                    };
+                    // Determine the header range (e.g. A1:D1)
+                    string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
+                    var worksheet = pkg.Workbook.Worksheets["Worksheet1"];
+                    worksheet.Cells[headerRange].LoadFromArrays(headerRow);
+                    worksheet.DefaultColWidth = 20.0;
+                    FileUtil.SaveAs("studentenliste.xslx", pkg.GetAsByteArray());
+                }
+            }
         protected void closeModal()
         {
             this.isAdd = false;

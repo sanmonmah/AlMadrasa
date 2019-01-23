@@ -32,7 +32,7 @@ namespace AlMadrasa.Shared.Models
         {
             Name="Name";            Surname="VorName";            Branch ="Botschaft";            Gender="Male";
             PostalCode="55656";        MonthContribution=40;       City="Rüsselsheim";
-            PhoneNr1="01792331826";         PhoneNr2="01792331826"; arClass="aldoha"; qClass="alaala";
+            PhoneNr1="01792331826";         PhoneNr2="01792331826"; arClass="5c1b535b99e52a4af4a7fb84"; qClass="5c137ef21c9d440000e3ba62";
             Birthday="01.01.2003"; EntryDate="01.01.2017"; LeavingDate="01.01.2018";
             
         }
@@ -55,6 +55,7 @@ namespace AlMadrasa.Shared.Models
         }
 
     }
+    //< td>@arClassList.FirstOrDefault(x => x.Id==emp.arClass).Name          </td >
     public class Contribution
     {
         [BsonId]
