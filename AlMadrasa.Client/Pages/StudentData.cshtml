@@ -60,28 +60,39 @@ else
         <thead>
             <tr>
                 <th >
-                    <input style="width:50%" type='text' placeholder="Name search" bind=@searchstr/>   
-                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                    <input style="width:70%" type='text' placeholder="Name eingeben" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("name") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
                 </th>    
                 <th >
-                    <input style="width:50%" type='text' placeholder="branch search" bind=@searchstr/>   
-                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>           
+                    <input style="width:70%" type='text' placeholder="Zweig eigeben" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("branch") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>           
                 </th>    
                 <th>
-                    <input style="width:50%" type='text' placeholder="Birthdate search" bind=@searchstr/>   
-                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                    <input style="width:70%" type='text' placeholder="Geburtsdatum search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("birthdate") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
                 </th>    
                 <th >
-                    <input style="width:50%" type='text' placeholder="Entrydate search" bind=@searchstr/>   
-                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                    <input style="width:70%" type='text' placeholder="Anmeldung search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("etrydate") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>                    
+                <th>
+                    <input style="width:70%" type='text' placeholder="Ar. klasse" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("arclass") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
                 </th>    
-                
-                <th>Ar. Klasse </th>    
-                <th>Q. Klasse</th>    
-                <th>Telefon-Nr.</th>                
+                <th>
+                    <input style="width:70%" type='text' placeholder=" Q. klasse" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("qclass") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>    
+                <th>
+                    <input style="width:70%" type='text' placeholder="telefon" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("phone") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>                
                 <th>Geschlecht</th>    
                 <th>PLZ    </th>    
-                <th>Stadt   </th>    
+                <th>
+                   <input style="width:70%" type='text' placeholder="stadt" bind=@searchstr/>   
+                   <button class="my-btn btn-primary" onclick=@( () => Filter("city") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>    
                 <th>Beitrag</th>    
             </tr>
             <tr>

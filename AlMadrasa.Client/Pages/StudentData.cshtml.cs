@@ -131,7 +131,7 @@ namespace AlMadrasa.Client.Pages
             }
                      
         }
-        public void Filter()
+        public void Filter(string criteria)
         {
             studList.Clear();
             if(String.IsNullOrEmpty(searchstr))
@@ -143,11 +143,65 @@ namespace AlMadrasa.Client.Pages
                // studList = allStudList.FindAll((g) => true);
             else
             {
-                foreach(Student st in allStudList)
-                    if(st.Name.ToUpper().Contains(searchstr.ToUpper()))
-                        studList.Add(st);
+                switch(criteria)
+                {
+                    case "name":
+                        foreach(Student st in allStudList)
+                            if(st.Name.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st); 
+                    break;
+                    case "birthdate":
+                        foreach(Student st in allStudList)
+                            if(st.Birthday.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "entrydate":
+                        foreach(Student st in allStudList)
+                            if(st.EntryDate.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "city":
+                        foreach(Student st in allStudList)
+                            if(st.City.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st); 
+                    break;
+                    case "telefon":
+                        foreach(Student st in allStudList)
+                            if(st.PhoneNr1.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "gender":
+                        foreach(Student st in allStudList)
+                            if(st.Gender.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "arclass":
+                        foreach(Student st in allStudList)
+                            if(GetarClassfromList(st.arClass).ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "qclass":
+                        foreach(Student st in allStudList)
+                            if(GetqClassfromList(st.qClass).ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st); 
+                    break;
+                    case "contribution":
+                        
+                    break;
+                    case "branch":
+                        foreach(Student st in allStudList)
+                            if(st.Branch.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                    case "postalcode":
+                        foreach(Student st in allStudList)
+                            if(st.PostalCode.ToUpper().Contains(searchstr.ToUpper()))
+                                studList.Add(st);  
+                    break;
+                }
+                
             }   
-            Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
+           // Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
             //    studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
         }
         protected async Task GetStudent()
