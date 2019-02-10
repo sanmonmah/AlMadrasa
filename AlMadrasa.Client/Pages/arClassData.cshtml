@@ -22,21 +22,8 @@
 </style>
 </head>
 
-<h1>Classes Data</h1>
-<h3>AlMadrasa registered calsses</h3>
-<br />
-<div>
-    <div style="float:left">       
-        <div style="float:left">
-            <button class="btn btn-primary" onclick="@AddarClass"><span class="oi oi-flag" aria-hidden="true"></span>&emsp;Add Arabic Class</button>
-        </div>        
-        <div style="float:left; padding-left:30px">
-            <button class="btn btn-primary" onclick="@AddqClass"><span class="oi oi-flag" aria-hidden="true"></span>&ensp;Add Quran Class</button>
-        </div>
-        
-    </div>
-
-</div>
+<h1>Klasse und Zweige</h1>
+<h3>AlMadrasa all registrierten Klassen</h3>
 <br />
 
 @if (arClassList == null || qClassList==null)
@@ -56,6 +43,9 @@ else
     <div class="grid-container">
         <div class="grid-container-div">
             <h3>Arabisch-Klassen</h3>
+            <div>
+                <button class="btn btn-primary" onclick="@AddarClass"><span class="oi oi-plus" aria-hidden="true"></span>&emsp;Neu Klasse</button>
+            </div>
             <table class='table'>
                 <thead>
                     <tr>
@@ -81,6 +71,9 @@ else
         
         <div class="grid-container-div">
             <h3>Quran-Klassen</h3>
+            <div>
+                <button class="btn btn-primary" onclick="@AddqClass"><span class="oi oi-plus" aria-hidden="true"></span>&ensp;Neue Klasse</button>
+            </div>
             <table class='table'>
                 <thead>
                     <tr>
@@ -104,6 +97,9 @@ else
         </div>
         <div class="grid-container-div">
             <h3>Verein-Zweige</h3>
+            <div>
+                <button class="btn btn-primary" onclick="@AddBranch"><span class="oi oi-plus" aria-hidden="true"></span>&ensp;Neuer Zweig</button>
+            </div>
             <table class='table'>
                 <thead>
                     <tr>

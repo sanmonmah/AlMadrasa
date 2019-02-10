@@ -350,6 +350,7 @@ namespace AlMadrasa.Client.Pages
 #region MonthContribution         
         //Month Calendar Methode           
             protected MonthCalendar month = new MonthCalendar();
+            protected MonthCalendar addmonth = new MonthCalendar();
             protected void AddMonth()
             {
                 month = new MonthCalendar();
@@ -364,15 +365,20 @@ namespace AlMadrasa.Client.Pages
                 this.isAddMonth = true;
             }
 
-            protected async Task SaveMonth()
+            protected async Task SaveMonth(MonthCalendar arg=null)
             {
-                if (month.Id != null)
+                MonthCalendar mon;
+                if(arg!=null)
+                    mon=arg;
+                else
+                    mon=month;
+                if (mon.Id != null)
                 {
-                    await Http.SendJsonAsync(HttpMethod.Put, "api/Month/Edit", month);
+                    await Http.SendJsonAsync(HttpMethod.Put, "api/Month/Edit", mon);
                 }
                 else
                 {
-                    await Http.SendJsonAsync(HttpMethod.Post, "/api/Month/Create", month);
+                    await Http.SendJsonAsync(HttpMethod.Post, "/api/Month/Create", mon);
                 }
                 this.isAddMonth = false;
                 await GetMonthCalendar();

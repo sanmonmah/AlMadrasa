@@ -34,7 +34,7 @@
 <br />
 <div>
     <div style="float:left">
-        <button class="btn btn-primary" onclick="@AddStudent"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Add Student</button>
+        <button class="btn btn-primary" onclick="@AddStudent"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Neuer Student</button>
        
     </div>
     
@@ -182,9 +182,9 @@ else
                             </div>
                             
                             <div class="form-group">
-                                <label for="Branch" class="my-control-label">Branch</label>
+                                <label for="Branch" class="my-control-label">Zweig</label>
                                 <select for="Branch" class="form-control" bind="@stud.Branch">
-                                    <option value="">-- Select Branch --</option>
+                                    <option value="">-- Zweig auswählen --</option>
                                     @foreach (var city in branchList)
                                     {
                                         <option value="@city.Name">@city.Name</option>
@@ -192,18 +192,18 @@ else
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="Birthday" class="my-control-label">Birthday</label>
+                                <label for="Birthday" class="my-control-label">Geburtsdatum</label>
                                 <input for="Birthday" class="form-control" bind="@stud.Birthday" />
                             </div>
                             <div class="form-group">
-                                <label for="EntryDate" class="my-control-label" >Entry Date</label>
+                                <label for="EntryDate" class="my-control-label" >Registriert seit</label>
                                 <input for="EntryDate" class="form-control" bind="@stud.EntryDate" />
                             </div>
                            
                             <div class="form-group">
-                                <label asp-for="arClass" class="my-control-label">Arabic Class</label>
+                                <label asp-for="arClass" class="my-control-label">Arab Klasse</label>
                                 <select asp-for="arClass" class="form-control" bind="@stud.arClass">
-                                    <option value="">-- Select arclass --</option>
+                                    <option value="">-- Arab Klasse auswählen --</option>
                                     @foreach (var ar in arClassList)
                                     {
                                         <option value="@ar.Id">@ar.Name</option>
@@ -211,9 +211,9 @@ else
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="qClass" class="my-control-label">Quran Class</label>
+                                <label asp-for="qClass" class="my-control-label">Quran Klasse</label>
                                 <select asp-for="qClass" class="form-control" bind="@stud.qClass">
-                                    <option value="">-- Select qclass --</option>
+                                    <option value="">-- Quran Klasse auswählen --</option>
                                     @foreach (var ql in qClassList)
                                     {
                                         <option value="@ql.Id">@ql.Name</option>
@@ -221,9 +221,9 @@ else
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Gender" class="my-control-label">Gender</label>
+                                <label asp-for="Gender" class="my-control-label">Geschlect</label>
                                 <select asp-for="Gender" class="form-control" bind="@stud.Gender">
-                                    <option value="">-- Select Gender --</option>
+                                    <option value="">-- Geschlecht auswählen --</option>
                                     @foreach (var city in genderList)
                                     {
                                         <option value="@city">@city</option>
@@ -231,26 +231,26 @@ else
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="PhoneNr1" class="my-control-label">PhoneNr1</label>
+                                <label asp-for="PhoneNr1" class="my-control-label">Telefon</label>
                                 <input asp-for="PhoneNr1" class="form-control" bind="@stud.PhoneNr1" />
                             </div>
                            
                             <div class="form-group">
-                                <label asp-for="PostalCode" class="my-control-label">Postal Code</label>
+                                <label asp-for="PostalCode" class="my-control-label">Postleihzahl</label>
                                 <input asp-for="PostalCode" class="form-control" bind="@stud.PostalCode" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="City" class="my-control-label">City</label>
+                                <label asp-for="City" class="my-control-label">Wohnort</label>
                                 <input asp-for="City" class="form-control" bind="@stud.City" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="MonthContribution" class="my-control-label">Monthly Contribution</label>
+                                <label asp-for="MonthContribution" class="my-control-label">Beitrag</label>
                                 <input asp-for="MonthContribution" class="form-control" bind="@stud.MonthContribution" />
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer" >
-                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveStudent())" data-dismiss="modal">Save</button>
+                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveStudent())" data-dismiss="modal">Speichern</button>
                     </div>
                     
                 </div>
@@ -265,32 +265,32 @@ else
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Delete student</h3>
+                        <h3 class="modal-title">Student Löschen</h3>
                     </div>
                     <div class="modal-body">
-                        <h4>Do you want to delete this student ??</h4>
+                        <h4>Soll der Student wirklich gelöscht werden?</h4>
                         <table class="table">
                             <tr>
                                 <td>Name</td>
                                 <td>@stud.Name</td>
                             </tr>
                             <tr>
-                                <td>Gender</td>
-                                <td>@stud.Gender</td>
+                                <td>Arab klasse</td>
+                                <td>@GetarClassfromList(stud.arClass)</td>
                             </tr>
                             <tr>
-                                <td>Arabic class</td>
-                                <td>@stud.arClass</td>
-                            </tr>
-                            <tr>
-                                <td>City</td>
+                                <td>Wohnort</td>
                                 <td>@stud.City</td>
+                            </tr>
+                            <tr>
+                                <td>Geschlect</td>
+                                <td>@stud.Gender</td>
                             </tr>
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" onclick="@(async () => await DeleteStudent(stud.Id))" data-dismiss="modal">YES</button>
-                        <button class="btn btn-warning" onclick="@closeModal">NO</button>
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteStudent(stud.Id))" data-dismiss="modal">Ja</button>
+                        <button class="btn btn-warning" onclick="@closeModal">Nein</button>
                     </div>
                 </div>
             </div>
