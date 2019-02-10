@@ -3,6 +3,25 @@
 @page "/classdata"
 @inherits StudentDataModel
 
+<head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 20px;
+  /*background-color: #211613;*/
+  padding: 20px;
+}
+
+.grid-container-div {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid green;
+  text-align: center;
+  border-radius: 4px;
+}
+</style>
+</head>
+
 <h1>Classes Data</h1>
 <h3>AlMadrasa registered calsses</h3>
 <br />
@@ -34,53 +53,80 @@
 else
 {
     <br />
-    <h3>Arabisch-Klassen</h3>
-    <table class='table'>
-        <thead>
-            <tr>
-                <th>Name</th>                
-                <th>Bearbeiten</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cls in arClassList)
-            {
-                <tr>
-                    <td>@cls.Name</td>                  
+    <div class="grid-container">
+        <div class="grid-container-div">
+            <h3>Arabisch-Klassen</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>                
+                        <th>Bearbeiten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cls in arClassList)
+                    {
+                        <tr>
+                            <td>@cls.Name</td>                  
 
-                    <td>
-                        <button class="btn btn-info" onclick="@(async () => await EditarClass(cls.Id))">Edit</button>
-                        <button class="btn btn-danger" onclick="@(async () => await DeletearClassConfirm(cls.Id))">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <br/>
-    <div></div>
+                            <td>
+                                <button class="btn btn-info" onclick="@(async () => await EditarClass(cls.Id))"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                                <button class="btn btn-danger" onclick="@(async () => await DeletearClassConfirm(cls.Id))"><span class="oi oi-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="grid-container-div">
+            <h3>Quran-Klassen</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>                
+                        <th>Bearbeiten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cls in qClassList)
+                    {
+                        <tr>
+                            <td>@cls.Name</td>                   
+                            <td>
+                                <button class="btn btn-info" onclick="@(async () => await EditqClass(cls.Id))"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                                <button class="btn btn-danger" onclick="@(async () => await DeleteqClassConfirm(cls.Id))"><span class="oi oi-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="grid-container-div">
+            <h3>Verein-Zweige</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>                
+                        <th>Bearbeiten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in branchList)
+                    {
+                        <tr>
+                            <td>@item.Name</td>                  
 
-    <h3>Quran-Klassen</h3>
-    <table class='table'>
-        <thead>
-            <tr>
-                <th>Name</th>                
-                <th>Bearbeiten</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cls in qClassList)
-            {
-                <tr>
-                    <td>@cls.Name</td>                   
-                    <td>
-                        <button class="btn btn-info" onclick="@(async () => await EditqClass(cls.Id))">Edit</button>
-                        <button class="btn btn-danger" onclick="@(async () => await DeleteqClassConfirm(cls.Id))">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
+                            <td>
+                                <button class="btn btn-info" onclick="@(async () => await EditBranch(item.Id))"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                                <button class="btn btn-danger" onclick="@(async () => await DeleteBranchConfirm(item.Id))"><span class="oi oi-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
     if (isAddarClass)
     {
         <div class="modal" tabindex="-1" style="display:block" role="dialog">
@@ -179,6 +225,58 @@ else
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" onclick="@(async () => await DeleteqClass(qcls.Id))" data-dismiss="modal">YES</button>
+                        <button class="btn btn-warning" onclick="@closeModal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (isAddBranch)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Verein-Zweig hinzufügen</h3>
+                        <button type="button" class="close" onclick="@closeModal">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="Name" class="control-label">Name</label>
+                                <input for="Name" class="form-control" bind="@branch.Name" />
+                            </div>
+                           
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveBranch())" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (isDeleteBranch)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Lösche Verein-Zweig</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Möchtest du wirklich diesen Zweig löschen??</h4>
+                        <table class="table">
+                            <tr>
+                                <td>Name</td>
+                                <td>@branch.Name</td>
+                            </tr>                           
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteqClass(branch.Id))" data-dismiss="modal">YES</button>
                         <button class="btn btn-warning" onclick="@closeModal">NO</button>
                     </div>
                 </div>

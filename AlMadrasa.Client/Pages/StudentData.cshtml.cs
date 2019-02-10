@@ -6,8 +6,8 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using AlMadrasa.Shared.Models;
-using OfficeOpenXml;
-using System.IO;
+// using OfficeOpenXml;
+// using System.IO;
 
 namespace AlMadrasa.Client.Pages
 {
@@ -35,6 +35,8 @@ namespace AlMadrasa.Client.Pages
         protected Boolean isDeletearClass = false;
         protected Boolean isAddqClass = false;
         protected Boolean isDeleteqClass = false;
+        protected Boolean isAddBranch = false;
+        protected Boolean isDeleteBranch = false;
         public string searchstr { get; set; }
         protected override async Task OnInitAsync()
         {
@@ -148,8 +150,6 @@ namespace AlMadrasa.Client.Pages
             Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
             //    studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
         }
-        
-        
         protected async Task GetStudent()
         {
             allStudList = await Http.GetJsonAsync<List<Student>>("api/Student/Index");
@@ -303,6 +303,51 @@ namespace AlMadrasa.Client.Pages
                 await GetqClasses();
             }    
             //
+#region Branch
+          protected Branche branch = new Branche();
+            protected void AddBranch()
+            {
+                branch = new Branche();
+                this.modalTitle = "Add arabic class";
+                this.isAddBranch = true;
+            }
+
+            protected async Task EditBranch(string ID)
+            {
+                branch = await Http.GetJsonAsync<Branche>("/api/Branch/Details/" + ID);
+                this.modalTitle = "Edit arabic class";
+                this.isAddBranch = true;
+            }
+
+            protected async Task SaveBranch()
+            {
+                if (branch.Id != null)
+                {
+                    await Http.SendJsonAsync(HttpMethod.Put, "api/Branch/Edit", branch);
+                }
+                else
+                {
+                    await Http.SendJsonAsync(HttpMethod.Post, "/api/Branch/Create", branch);
+
+                }
+                this.isAddBranch = false;
+                await GetBranches();
+            }
+
+            protected async Task DeleteBranchConfirm(string ID)
+            {
+                branch = await Http.GetJsonAsync<Branche>("/api/Branch/Details/" + ID);
+                this.isDeleteBranch = true;
+            }
+            protected async Task DeleteBranch(string ID)
+            {
+                await Http.DeleteAsync("api/Branch/Delete/" + ID);
+                this.isDeleteBranch = false;
+                await GetBranches();
+            }    
+            //
+#endregion   
+#region MonthContribution         
         //Month Calendar Methode           
             protected MonthCalendar month = new MonthCalendar();
             protected void AddMonth()
@@ -328,7 +373,6 @@ namespace AlMadrasa.Client.Pages
                 else
                 {
                     await Http.SendJsonAsync(HttpMethod.Post, "/api/Month/Create", month);
-
                 }
                 this.isAddMonth = false;
                 await GetMonthCalendar();
@@ -353,7 +397,7 @@ namespace AlMadrasa.Client.Pages
                 await GetContributions();
             }
             //    
-
+#endregion
            protected string GetarClassfromList(string id)
             {
                arClass xx= arClassList.FirstOrDefault(x => x.Id==id);
@@ -366,24 +410,24 @@ namespace AlMadrasa.Client.Pages
                return (xx==null) ? "":xx.Name;
                
             }
-            void ExportToExcel()
-            {
-                using (ExcelPackage pkg = new ExcelPackage())
-                {
+            // void ExportToExcel()
+            // {
+            //     using (ExcelPackage pkg = new ExcelPackage())
+            //     {
                     
-                    pkg.Workbook.Worksheets.Add("StudentList");
-                    var headerRow = new List<string[]>()
-                    {
-                        new string[] { "Id", "FirstName", "LastName",  }
-                    };
-                    // Determine the header range (e.g. A1:D1)
-                    string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
-                    var worksheet = pkg.Workbook.Worksheets["Worksheet1"];
-                    worksheet.Cells[headerRange].LoadFromArrays(headerRow);
-                    worksheet.DefaultColWidth = 20.0;
-                    FileUtil.SaveAs("studentenliste.xslx", pkg.GetAsByteArray());
-                }
-            }
+            //         pkg.Workbook.Worksheets.Add("StudentList");
+            //         var headerRow = new List<string[]>()
+            //         {
+            //             new string[] { "Id", "FirstName", "LastName",  }
+            //         };
+            //         // Determine the header range (e.g. A1:D1)
+            //         string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
+            //         var worksheet = pkg.Workbook.Worksheets["Worksheet1"];
+            //         worksheet.Cells[headerRange].LoadFromArrays(headerRow);
+            //         worksheet.DefaultColWidth = 20.0;
+            //         FileUtil.SaveAs("studentenliste.xslx", pkg.GetAsByteArray());
+            //     }
+            // }
         protected void closeModal()
         {
             this.isAdd = false;
@@ -394,6 +438,8 @@ namespace AlMadrasa.Client.Pages
             this.isDeleteqClass = false;
             this.isAddMonth = false;
             this.isDeleteMonth = false;
+            isAddBranch=false;
+            isDeleteBranch=false;
         }
     }
 }

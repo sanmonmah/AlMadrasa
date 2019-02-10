@@ -97,6 +97,17 @@ namespace AlMadrasa.Server.DataAccess
                 throw;
             }
         }
+        public void AddBranch(Branche cls)
+        {
+            try
+            {
+                db.brancheRecord.InsertOne(cls);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public void AddMonth(MonthCalendar mon)
         {
             try
@@ -195,6 +206,28 @@ namespace AlMadrasa.Server.DataAccess
                 throw;
             }
         }
+        public Branche GetBranchData(string id, string Criteria = "")
+        {
+            try
+            {
+                FilterDefinition<Branche> filterStudentData;
+                switch (Criteria)
+                {
+
+                    case "name":
+                        filterStudentData = Builders<Branche>.Filter.Eq("Name", id);
+                        break;
+                    default:
+                        filterStudentData = Builders<Branche>.Filter.Eq("Id", id);
+                        break;
+                }
+                return db.brancheRecord.Find(filterStudentData).FirstOrDefault();
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public MonthCalendar GetMonthData(string id, string Criteria = "")
         {
             try
@@ -245,6 +278,17 @@ namespace AlMadrasa.Server.DataAccess
             try
             {
                 db.qClassRecord.ReplaceOne(filter: g => g.Id == cls.Id, replacement: cls);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void UpdateBranch(Branche cls)
+        {
+            try
+            {
+                db.brancheRecord.ReplaceOne(filter: g => g.Id == cls.Id, replacement: cls);
             }
             catch
             {
@@ -306,6 +350,18 @@ namespace AlMadrasa.Server.DataAccess
             {
                 FilterDefinition<qClass> qClassData = Builders<qClass>.Filter.Eq("Id", id);
                 db.qClassRecord.DeleteOne(qClassData);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void DeleteBranch(string id)
+        {
+            try
+            {
+                FilterDefinition<Branche> qClassData = Builders<Branche>.Filter.Eq("Id", id);
+                db.brancheRecord.DeleteOne(qClassData);
             }
             catch
             {

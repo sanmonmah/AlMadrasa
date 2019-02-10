@@ -145,7 +145,33 @@ namespace AlMadrasa.Server.Controllers
         {
             return objstudent.GetBranches();
         }
+        [HttpPost]
+        [Route("api/Branch/Create")]
+        public void BranchCreate([FromBody] Branche stud)
+        {
+            objstudent.AddBranch(stud);
+        }
 
+        [HttpGet]
+        [Route("api/Branch/Details/{id}")]
+        public Branche BranchDetails(string id)
+        {
+            return objstudent.GetBranchData(id);            
+        }
+
+        [HttpPut]
+        [Route("api/Branch/Edit")]
+        public void BranchEdit([FromBody]Branche qcls)
+        {
+            objstudent.UpdateBranch(qcls);
+        }
+
+        [HttpDelete]
+        [Route("api/Branch/Delete/{id}")]
+        public void BranchDelete(string id)
+        {
+            objstudent.DeleteBranch(id);
+        }
         /// MonthCalendar
         [HttpPost]
         [Route("api/Month/Create")]

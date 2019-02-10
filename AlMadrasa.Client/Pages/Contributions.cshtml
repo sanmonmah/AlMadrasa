@@ -33,9 +33,9 @@ else
             <tr>
             <th nowrap>
                 <input style="width:70%" type='text' placeholder="Name search" bind=@searchstr/>   
-                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button>
+                <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
             </th>    
             @if (monthCalendarList != null)
             {   
@@ -43,28 +43,28 @@ else
                 foreach (var mon in monthCalendarList)
                 {       
                     <th>@mon.Month   
-                    <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
-                    
-                    @if(index--==1)
-                    {
-                        month.Id=null;
-                        var tok=mon.Month.Split('.');
-                        if(tok.Length==2)
+                        <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
+                        @if(index--==1)
                         {
-                            int x=System.Convert.ToInt16(tok[0])+1;
-                            if(x==13)
+                           /* month.Id=null;
+                            var tok=mon.Month.Split('.');
+                            if(tok.Length==2)
                             {
-                                x=1;
-                                int y=System.Convert.ToInt16(tok[1])+1;
-                                month.Month=x.ToString("00")+"."+y;
-                            }
-                            else
-                            {
-                                month.Month=x.ToString("00")+"."+tok[1];
-                            }
-                            <button class="my-btn btn-secondary" onclick=@( () => SaveMonth() )><span class="oi oi-plus" aria-hidden="true"></span></button>
+                                int x=System.Convert.ToInt16(tok[0])+1;
+                                if(x==13)
+                                {
+                                    x=1;
+                                    int y=System.Convert.ToInt16(tok[1])+1;
+                                    month.Month=x.ToString("00")+"."+y;
+                                }
+                                else
+                                {
+                                    month.Month=x.ToString("00")+"."+tok[1];
+                                }
+                                <button class="my-btn btn-secondary" onclick=@( () => SaveMonth() )><span class="oi oi-plus" aria-hidden="true"></span></button>
+                            }*/
                         }
-                    }</th>
+                    </th>
                 }
              }
             </tr>         
@@ -167,4 +167,5 @@ else
 
 @functions {
     int index=0;
+    
 }

@@ -35,7 +35,7 @@
 <div>
     <div style="float:left">
         <button class="btn btn-primary" onclick="@AddStudent"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Add Student</button>
-        <button class="btn btn-primary" onclick="@DownloadToExcel"><span class="oi oi-person" aria-hidden="true"></span>&emsp;Download</button>
+       
     </div>
     
 
@@ -59,76 +59,77 @@ else
     <table class='my-table'>
         <thead>
             <tr>
-            <th >
-                <input style="width:50%" type='text' placeholder="Name search" bind=@searchstr/>   
-                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
-            </th>    
-            <th >
-                <input style="width:50%" type='text' placeholder="branch search" bind=@searchstr/>   
-                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>           </th>    
-            <th>
-                <input style="width:50%" type='text' placeholder="Birthdate search" bind=@searchstr/>   
-                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
-            </th>    
-            <th >
-                <input style="width:50%" type='text' placeholder="Entrydate search" bind=@searchstr/>   
-                <button class="my-btn btn-primary" onclick=@Filter>🔎</button>
-            </th>    
-               
-            <th>Ar. Klasse </th>    
-            <th>Q. Klasse</th>    
-            <th>Telefon-Nr.</th>                
-            <th>Geschlecht</th>    
-            <th>PLZ    </th>    
-            <th>Stadt   </th>    
-            <th>Beitrag</th>    
+                <th >
+                    <input style="width:50%" type='text' placeholder="Name search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>    
+                <th >
+                    <input style="width:50%" type='text' placeholder="branch search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>           
+                </th>    
+                <th>
+                    <input style="width:50%" type='text' placeholder="Birthdate search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>    
+                <th >
+                    <input style="width:50%" type='text' placeholder="Entrydate search" bind=@searchstr/>   
+                    <button class="my-btn btn-primary" onclick=@Filter><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                </th>    
+                
+                <th>Ar. Klasse </th>    
+                <th>Q. Klasse</th>    
+                <th>Telefon-Nr.</th>                
+                <th>Geschlecht</th>    
+                <th>PLZ    </th>    
+                <th>Stadt   </th>    
+                <th>Beitrag</th>    
             </tr>
             <tr>
-            <th >Name
-               <button class="my-btn btn-primary" onclick=@( () => {SortAscending("name"); Messages="List has been sorted";} )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )>🠫</button> 
-            </th>    
-           
-            <th >Zweig
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("branch") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("branch") )>🠫</button>           </th>    
-            <th >Geburt
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("birthdate") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("birthdate") )>🠫</button>
-             </th>    
-            <th >Anmedlung
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("etrydate") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("entrydate") )>🠫</button>
-             </th>    
-              
-            <th >Ar. Klasse
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("arclass") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("arclass") )>🠫</button>
-            </th>    
-            <th >Q. Klasse  
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("qclass") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("qclass") )>🠫</button>
-            </th>  
-            <th >Telefon  
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("telefon") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("telefon") )>🠫</button>
-            </th>  
-             <th >Geschlecht  
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("gender") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("gender") )>🠫</button>
-            </th>                
-            <th >PLZ  
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("postalcode") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("postalcode") )>🠫</button>
-            </th>       
-            <th >Stadt  
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("city") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("city") )>🠫</button>
-            </th>       
-            <th >Beitrag
-                <button class="my-btn btn-primary" onclick=@( () => SortAscending("contribution") )>🠩</button>
-                <button class="my-btn btn-primary" onclick=@( () => SortDescending("contribution") )>🠫</button>
-            </th>         
+                <th >Name
+                    <button class="my-btn btn-primary" onclick=@( () => {SortAscending("name"); Messages="List has been sorted";} )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button> 
+                </th>    
+                <th >Zweig
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("branch") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("branch") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>     
+                </th>    
+                <th >Geburt
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("birthdate") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("birthdate") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>    
+                <th >Anmedlung
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("etrydate") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("entrydate") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>    
+                
+                <th >Ar. Klasse
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("arclass") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("arclass") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>    
+                <th >Q. Klasse  
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("qclass") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("qclass") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>  
+                <th >Telefon  
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("telefon") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("telefon") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>  
+                <th >Geschlecht  
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("gender") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("gender") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>                
+                <th >PLZ  
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("postalcode") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("postalcode") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>       
+                <th >Stadt  
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("city") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("city") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>       
+                <th >Beitrag
+                    <button class="my-btn btn-primary" onclick=@( () => SortAscending("contribution") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => SortDescending("contribution") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+                </th>         
             </tr>
         </thead>
         <tbody>
@@ -143,8 +144,7 @@ else
                     <td>@emp.Name </td>    
                     <td>@emp.Branch           </td>    
                     <td>@emp.Birthday         </td>    
-                    <td>@emp.EntryDate        </td>    
-                   
+                    <td>@emp.EntryDate        </td>                       
                     <td>@GetarClassfromList(emp.arClass)         </td>  
                     <td>@GetqClassfromList(emp.qClass )          </td>    
                     <td>@emp.PhoneNr1         </td>    
@@ -153,8 +153,8 @@ else
                     <td>@emp.City             </td>    
                     <td>@emp.MonthContribution</td>    
                     <td nowrap>
-                        <button class="my-btn btn-info" onclick="@(async () => await EditStudent(@emp.Id))">🖉</button>
-                        <button class="my-btn btn-danger" onclick="@(async () => await DeleteConfirm(@emp.Id))">🗑</button>
+                        <button class="my-btn btn-info" onclick="@(async () => await EditStudent(@emp.Id))"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                        <button class="my-btn btn-danger" onclick="@(async () => await DeleteConfirm(@emp.Id))"><span class="oi oi-trash" aria-hidden="true"></span></button>
                     </td>
                 </tr>
             }
