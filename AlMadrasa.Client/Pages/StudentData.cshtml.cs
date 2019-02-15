@@ -201,8 +201,8 @@ namespace AlMadrasa.Client.Pages
                 }
                 
             }   
-           // Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
-            //    studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
+            Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
+                studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
         }
         protected async Task GetStudent()
         {

@@ -43,6 +43,7 @@ else
                 foreach (var mon in monthCalendarList)
                 {       
                     <th>@mon.Month   
+                       @* 
                         <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
                         @if(index--==1)
                         {
@@ -61,9 +62,10 @@ else
                                 {
                                     addmonth.Month=x.ToString("00")+"."+tok[1];
                                 }
-                                <button class="my-btn btn-secondary" onclick=@( () => SaveMonth(addmonth) )><span class="oi oi-plus" aria-hidden="true"></span></button>
+                                <button class="my-btn btn-secondary" onclick=@( () => SaveMonth(addmonth) )><span class="oi oi-plus" aria-hidden="true"></span></button> 
                             }
                         }
+                        *@
                     </th>
                 }
              }
@@ -85,17 +87,20 @@ else
                         {
                             if(con.StudentId==stud.Id && con.MonthID==mon.Id)
                             {
-                               <td>                                     
+                               <td>         
+                                   <i style=@(con.Payed==1?"color:green":"color:red")>@(con.Payed==1?"OK":"NOK")</i>                             
+                                @* 
                                 @if(con.Payed==1)
                                 {
                                     <i style="color:green">OK</i> 
-                                    <button class="my-btn btn-info" onclick=@(async () => {con.Payed=0; await SaveContribution(con); })><span class="oi oi-thumb-up" aria-hidden="true"></span></button>
+                                  <button class="my-btn btn-info" onclick=@(async () => {con.Payed=0; await SaveContribution(con); })><span class="oi oi-thumb-up" aria-hidden="true"></span></button> 
                                 }
                                 else
                                 {
                                     <i style="color:red">NOK</i>
-                                    <button class="my-btn btn-info" onclick=@( async () => { con.Payed=1; await SaveContribution(con);} )><span class="oi oi-thumb-down" aria-hidden="true"></span></button>
-                                }                                 
+                                    <button class="my-btn btn-info" onclick=@( async () => { con.Payed=1; await SaveContribution(con);} )><span class="oi oi-thumb-down" aria-hidden="true"></span></button> 
+                                } 
+                                *@                            
                                 </td>    
                             }                            
                         }

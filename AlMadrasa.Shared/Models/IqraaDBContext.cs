@@ -17,13 +17,14 @@ namespace AlMadrasa.Shared.Models
     {
         private readonly IMongoDatabase _mongoDatabase;
         
-        public IqraaDBContext( string connectstring="")
+        public IqraaDBContext( string connectstring="", string dbstr="")
         {
-            MongoClient client;
+            MongoClient client;            
             if(connectstring=="")
                  client = new MongoClient("mongodb://localhost:27017");
             else
                  client = new MongoClient(connectstring);
+                 
              _mongoDatabase = client.GetDatabase("IqraaDB");
             
         //    var client = new MongoClient("mongodb+srv://user:pwd@moneercl-rc39g.mongodb.net/test?retryWrites=true");
@@ -39,8 +40,6 @@ namespace AlMadrasa.Shared.Models
                 //return _mongoDatabase.GetCollection<Employee>("EmployeeRecord");
                 var coll= _mongoDatabase.GetCollection<Student>("Students");
                 return coll;
-                
-                
             }
         }
 

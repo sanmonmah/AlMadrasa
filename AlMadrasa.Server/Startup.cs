@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using AlMadrasa.Shared.Models;
 
 namespace AlMadrasa.Server
 {
@@ -24,8 +25,14 @@ namespace AlMadrasa.Server
         }
         public void ConfigureServices(IServiceCollection services)
         {
+         
             services.AddMvc();
-
+            services.Configure<Settings>(
+                options =>
+                {
+                    options.ConnectionString = Configuration.GetSection("MongoDb:ConnectionString").Value;
+                    options.Database = Configuration.GetSection("MongoDb:Database").Value;
+             });
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]

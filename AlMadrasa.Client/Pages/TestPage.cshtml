@@ -1,0 +1,335 @@
+@using AlMadrasa.Shared
+@using AlMadrasa.Shared.Models
+@page "/testpage"
+@inherits StudentDataModel
+
+<header>
+    <style>
+.pagebutton {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.currentpage {
+    background-color: dodgerblue;
+    color: white;
+}        
+    </style>
+</header>
+<h1>Studenten Daten</h1>
+<h3>Die monatlichen Beiträge</h3>
+
+<div>
+    <div style="float:left">
+        <button class="btn btn-primary" onclick="@AddMonth"><span class="oi oi-calendar" aria-hidden="true"></span>Monat+</button>
+    </div>
+
+</div>
+<br />
+
+@if (studList == null)
+{
+    <br />
+    <!-- <p><em>Loading...</em></p> -->
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+}
+else
+{
+    <br />
+    <table class='my-table'  >
+        <thead>
+            <tr>
+            <th nowrap>
+                <input style="width:70%" type='text' placeholder="Name search" bind=@searchstr/>   
+                <button class="my-btn btn-primary" onclick=@( () => Filter("name") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                <button class="my-btn btn-primary" onclick=@( () => SortAscending("name") )><span class="oi oi-arrow-top" aria-hidden="true"></span></button>
+                <button class="my-btn btn-primary" onclick=@( () => SortDescending("name") )><span class="oi oi-arrow-bottom" aria-hidden="true"></span></button>
+            </th>    
+            @if (monthCalendarList != null)
+            {   
+                if(MonthItems==null)
+                {
+                    initializeLists();
+                }
+                index=MonthItems.Count();
+                foreach (var mon in MonthItems)
+                {       
+                    <th>@mon.Month   
+                        <button class="my-btn btn-danger" onclick=@( () => DeleteMonthConfirm(mon.Id) )><span class="oi oi-delete" aria-hidden="true"></span></button>     
+                    </th>
+                }
+             }
+            </tr>         
+        </thead>
+        <tbody>
+           
+            @foreach (var stud in StudItems)
+            {
+                var str="";
+                @if(index++%2==1)
+                {
+                    str="background:#555";
+                }                
+                <tr style=@str>
+                    <td>@stud.Name            </td>   
+                    @foreach (var mon in MonthItems)
+                    {
+                        @foreach (var con in contributionList)
+                        {
+                            if(con.StudentId==stud.Id && con.MonthID==mon.Id)
+                            {
+                               <td>                                     
+                                @if(con.Payed==1)
+                                {
+                                    <i style="color:green">OK</i> 
+                                    <button class="my-btn btn-info" onclick=@(async () => {con.Payed=0; await SaveContribution(con); })><span class="oi oi-thumb-up" aria-hidden="true"></span></button>
+                                }
+                                else
+                                {
+                                    <i style="color:red">NOK</i>
+                                    <button class="my-btn btn-info" onclick=@( async () => { con.Payed=1; await SaveContribution(con);} )><span class="oi oi-thumb-down" aria-hidden="true"></span></button>
+                                }                                 
+                                </td>    
+                            }                            
+                        }
+                    }                      
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="btn pagebutton btn-info" onclick=@(async () => SetPagerSize("back"))>&laquo;</button>
+        <button class="btn pagebutton btn-secondary" onclick=@(async () => NavigateToPage("previous"))>&lsaquo;</button>
+        @for (int i = startPage; i <= endPage; i++)
+        {
+            var currentPage = i;
+            <button class="btn pagebutton @(currentPage==curPage?"currentpage":"")" onclick=@(async () => updateList(currentPage))>
+                @currentPage
+            </button>
+        }
+        <button class="btn pagebutton btn-secondary" onclick=@(async () => NavigateToPage("next"))>&rsaquo;</button>
+        <button class="btn pagebutton btn-info" onclick=@(async () => SetColumnPagerSize("forward"))>&raquo;</button>
+        <span class="pagebutton btn btn-link disabled">Studentenliste @curPage of @totalPages</span>
+    </div>
+    
+    <div class="pagination" style="padding:3px;">
+        
+        <button class="btn pagebutton btn-info" onclick=@(async () => SetColumnPagerSize("back"))>&laquo;</button>
+        <button class="btn pagebutton btn-secondary" onclick=@(async () => NavigateToColumnPage("previous"))>&lsaquo;</button>
+        @for (int i = startColumnPage; i <= endColumnPage; i++)
+        {
+            var currentPage = i;
+            <button class="btn pagebutton @(currentPage==curColumnPage?"currentpage":"")" onclick=@(async () => updateColumnList(currentPage))>
+                @currentPage
+            </button>
+        }
+        <button class="btn pagebutton btn-secondary" onclick=@(async () => NavigateToColumnPage("next"))>&rsaquo;</button>
+        <button class="btn pagebutton btn-info" onclick=@(async () => SetColumnPagerSize("forward"))>&raquo;</button>
+        <span class="pagebutton btn btn-link disabled">Monatsliste @curColumnPage of @totalColumnPages</span>
+    </div>
+    if (isAddMonth)
+    {
+        <div style="overflow:auto;height:80%">
+        <div class="modal" tabindex="-1" style="display:block" role="dialog" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Neue Beitragsmonat</h3>
+                        <button type="button" class="close" onclick="@closeModal">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <form>
+                            <div class="form-group">
+                                <label for="Monat" class="control-label">Monat</label>
+                                <input for="Monat" class="form-control" bind="@month.Month" />
+                            </div>
+                           
+                        </form>
+                    </div>
+                    <div class="modal-footer" >
+                        <button class="btn btn-block btn-success" onclick="@(async () => await SaveMonth())" data-dismiss="modal">Save</button>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>   
+    }
+
+    if (isDeleteMonth)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Month</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Do you want to delete this Month ??</h4>
+                        <table class="table">
+                            <tr>
+                                <td>Month</td>
+                                <td>@month.Month</td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" onclick="@(async () => await DeleteMonth(month.Id))" data-dismiss="modal">YES</button>
+                        <button class="btn btn-warning" onclick="@closeModal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}  
+
+@functions {
+int index=0;
+int PageSize=10;
+
+int totalPages;
+int curPage=1;
+int pagerSize=3;
+
+int startPage;
+int endPage;
+
+int PageColumnSize=8;
+int totalColumnPages;
+int curColumnPage=1;
+int pagerColumnSize=3;
+
+int startColumnPage;
+int endColumnPage;
+
+IEnumerable<Student> StudItems { get; set; }
+IEnumerable<MonthCalendar> MonthItems { get; set; }
+IEnumerable<Student> StudList { get; set; }
+IEnumerable<MonthCalendar> MonthList { get; set; }
+
+public void initializeLists()
+{
+    totalPages = (int)Math.Ceiling(studList.Count() / (decimal)PageSize);
+    StudItems = studList.Skip((curPage - 1) * PageSize).Take(PageSize);
+    SetPagerSize("forward");
+    
+    totalColumnPages = (int)Math.Ceiling(monthCalendarList.Count() / (decimal)PageColumnSize);
+    MonthItems = monthCalendarList.Skip((curColumnPage-1) * PageColumnSize).Take(PageColumnSize);
+    SetColumnPagerSize("forward");
+}
+public void updateList(int currentPage)
+{
+    StudItems = studList.Skip((currentPage - 1) * PageSize).Take(PageSize);
+    curPage = currentPage;
+}
+
+public void SetPagerSize(string direction)
+{
+    if (direction == "forward" && endPage < totalPages)
+    {
+        startPage = endPage + 1;
+        if (endPage + pagerSize < totalPages)
+        {
+            endPage = startPage + pagerSize - 1;
+        }
+        else
+        {
+            endPage = totalPages;
+        }
+    }
+    else if (direction == "back" && startPage > 1)
+    {
+        endPage = startPage - 1;
+        startPage = startPage - pagerSize;
+    }
+}
+
+public void NavigateToPage(string direction)
+{
+    if (direction == "next")
+    {
+        if (curPage < totalPages)
+        {
+            if (curPage == endPage)
+            {
+                SetPagerSize("forward");
+            }
+            curPage += 1;
+        }
+    }
+    else if (direction == "previous")
+    {
+        if (curPage > 1)
+        {
+            if (curPage == startPage)
+            {
+                SetPagerSize("back");
+            }
+            curPage -= 1;
+        }
+    }
+    updateList(curPage);
+}
+
+public void updateColumnList(int currentPage)
+{
+    MonthItems = monthCalendarList.Skip((curColumnPage-1) * PageColumnSize).Take(PageColumnSize);
+    curColumnPage = currentPage;
+}
+
+public void SetColumnPagerSize(string direction)
+{
+    if (direction == "forward" && endColumnPage < totalColumnPages)
+    {
+        startColumnPage = endColumnPage + 1;
+        if (endColumnPage + pagerColumnSize < totalColumnPages)
+        {
+            endColumnPage = startColumnPage + pagerColumnSize - 1;
+        }
+        else
+        {
+            endColumnPage = totalColumnPages;
+        }
+    }
+    else if (direction == "back" && startColumnPage > 1)
+    {
+        endColumnPage = startColumnPage - 1;
+        startColumnPage = startColumnPage - pagerColumnSize;
+    }
+}
+
+public void NavigateToColumnPage(string direction)
+{
+    if (direction == "next")
+    {
+        if (curColumnPage < totalColumnPages)
+        {
+            if (curColumnPage == endColumnPage)
+            {
+                SetColumnPagerSize("forward");
+            }
+            curColumnPage += 1;
+        }
+    }
+    else if (direction == "previous")
+    {
+        if (curColumnPage > 1)
+        {
+            if (curColumnPage == startColumnPage)
+            {
+                SetColumnPagerSize("back");
+            }
+            curColumnPage -= 1;
+        }
+    }
+    updateColumnList(curColumnPage);
+}
+}

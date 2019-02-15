@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using AlMadrasa.Shared.Models;
 using System.IO;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace AlMadrasa.Server.DataAccess
 {
     
     public class StudentDataAccessLayer
     {
-        IqraaDBContext db = new IqraaDBContext();
+       public IConfiguration config { get; }
        
+        IqraaDBContext db = new IqraaDBContext();
+        
         //To Get all employees details       
         public List<Student> GetAllStudents()
         {
