@@ -13,8 +13,11 @@ namespace AlMadrasa.Server.Controllers
 {
     public class StudentController : Controller
     {
-        StudentDataAccessLayer objstudent = new StudentDataAccessLayer();
-        
+        IStudentDataAccessLayer objstudent;
+        public StudentController(IStudentDataAccessLayer stud)
+        {
+            objstudent = stud;
+        }
         // [HttpPost]
         // [Route("api/Student/Edit")]
         // public void Save2Json([FromBody] bool save)

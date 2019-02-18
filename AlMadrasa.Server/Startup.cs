@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using AlMadrasa.Shared.Models;
+using AlMadrasa.Server.DataAccess;
+using MongoDB.Driver;
 
 namespace AlMadrasa.Server
 {
@@ -33,6 +35,12 @@ namespace AlMadrasa.Server
                     options.ConnectionString = Configuration.GetSection("MongoDb:ConnectionString").Value;
                     options.Database = Configuration.GetSection("MongoDb:Database").Value;
              });
+             services.AddSingleton<IMongoClient, MongoClient>(
+                _ => new MongoClient(Configuration.GetSection("MongoDb:ConnectionString").Value));
+
+            services.AddTransient<IIqraaDBContext, IqraaDBContext>();
+            services.AddTransient<IStudentDataAccessLayer, StudentDataAccessLayer>();
+
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]

@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <!-- <RuntimeIdentifier>win10-x64</RuntimeIdentifier> -->
-    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+    <!-- <RuntimeIdentifier>win7-x64</RuntimeIdentifier> -->
     <!-- <RuntimeIdentifier>win81-x64</RuntimeIdentifier> -->
     <!-- <RuntimeIdentifier>ubuntu.14.04-x64</RuntimeIdentifier> -->
     <!-- <RuntimeIdentifier>debian.8-x64</RuntimeIdentifier> -->

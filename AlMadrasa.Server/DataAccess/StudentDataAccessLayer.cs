@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -9,14 +9,19 @@ using System.IO;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 
+
 namespace AlMadrasa.Server.DataAccess
 {
     
-    public class StudentDataAccessLayer
+    public class StudentDataAccessLayer: IStudentDataAccessLayer
     {
-       public IConfiguration config { get; }
+        public StudentDataAccessLayer(IIqraaDBContext _db)
+        {            
+            db = _db;
+        }
+    //    public IConfiguration config { get; }
        
-        IqraaDBContext db = new IqraaDBContext();
+        private readonly IIqraaDBContext db;// = new IqraaDBContext();
         
         //To Get all employees details       
         public List<Student> GetAllStudents()
