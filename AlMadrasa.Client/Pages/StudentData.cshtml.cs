@@ -24,7 +24,7 @@ namespace AlMadrasa.Client.Pages
         protected List<Branche> branchList = new List<Branche>();
         protected List<MonthCalendar> monthCalendarList = new List<MonthCalendar>();
         protected List<Contribution> contributionList = new List<Contribution>();
-        protected List<string> genderList = new List<string>(){"Male","Female"};
+        protected List<string> genderList = new List<string>(){"männlich","weiblich"};
         protected Student stud = new Student();
         protected string modalTitle { get; set; }
         protected Boolean isDelete = false;
@@ -146,63 +146,55 @@ namespace AlMadrasa.Client.Pages
                 switch(criteria)
                 {
                     case "name":
-                        foreach(Student st in allStudList)
-                            if(st.Name.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st); 
+                        // foreach(Student st in allStudList)
+                        //     if(st.Name.ToUpper().Contains(searchstr.ToUpper()))
+                        //         studList.Add(st); 
+                        studList = allStudList.FindAll( (g) => g.Name.ToUpper().Contains(searchstr.ToUpper()));
                     break;
                     case "birthdate":
-                        foreach(Student st in allStudList)
-                            if(st.Birthday.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                        // foreach(Student st in allStudList)
+                        //     if(st.Birthday.ToUpper().Contains(searchstr.ToUpper()))
+                        //         studList.Add(st);  
+                        studList = allStudList.FindAll( (g) => g.Birthday.ToUpper().Contains(searchstr.ToUpper()));
                     break;
-                    case "entrydate":
-                        foreach(Student st in allStudList)
-                            if(st.EntryDate.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                    case "entrydate":                         
+                        studList = allStudList.FindAll( (g) => g.EntryDate.ToUpper().Contains(searchstr.ToUpper()));
                     break;
                     case "city":
-                        foreach(Student st in allStudList)
-                            if(st.City.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st); 
+                        studList = allStudList.FindAll( (g) => g.City.ToUpper().Contains(searchstr.ToUpper()));
                     break;
-                    case "telefon":
-                        foreach(Student st in allStudList)
-                            if(st.PhoneNr1.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                    case "telefon":                        
+                        studList = allStudList.FindAll( (g) => g.PhoneNr1.ToUpper().Contains(searchstr.ToUpper()));
                     break;
                     case "gender":
-                        foreach(Student st in allStudList)
-                            if(st.Gender.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                      studList = allStudList.FindAll( (g) => g.Gender.ToUpper().Contains(searchstr.ToUpper()));
                     break;
                     case "arclass":
-                        foreach(Student st in allStudList)
-                            if(GetarClassfromList(st.arClass).ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                        // foreach(Student st in allStudList)
+                        //     if(GetarClassfromList(st.arClass).ToUpper().Contains(searchstr.ToUpper()))
+                        //         studList.Add(st);  
+                        studList = allStudList.FindAll( (g) => GetarClassfromList(g.arClass).ToUpper().Contains(searchstr.ToUpper()));        
                     break;
                     case "qclass":
-                        foreach(Student st in allStudList)
-                            if(GetqClassfromList(st.qClass).ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st); 
+                        // foreach(Student st in allStudList)
+                        //     if(GetqClassfromList(st.qClass).ToUpper().Contains(searchstr.ToUpper()))
+                        //         studList.Add(st); 
+                        studList = allStudList.FindAll( (g) => GetarClassfromList(g.qClass).ToUpper().Contains(searchstr.ToUpper()));
                     break;
                     case "contribution":
                         
                     break;
                     case "branch":
-                        foreach(Student st in allStudList)
-                            if(st.Branch.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                        studList = allStudList.FindAll( (g) => GetBranchfromList(g.Branch).ToUpper().Contains(searchstr.ToUpper()));  
                     break;
                     case "postalcode":
-                        foreach(Student st in allStudList)
-                            if(st.PostalCode.ToUpper().Contains(searchstr.ToUpper()))
-                                studList.Add(st);  
+                        studList = allStudList.FindAll( (g) => g.PostalCode.ToUpper().Contains(searchstr.ToUpper()));
                     break;
                 }
                 
             }   
             Messages=allStudList.Count.ToString()+","+studList.Count.ToString();          
-                studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
+            //    studList = allStudList.FindAll( (g) => g.Name.Contains(searchstr));             
         }
         protected async Task GetStudent()
         {
@@ -468,7 +460,11 @@ namespace AlMadrasa.Client.Pages
             {
                qClass xx= qClassList.FirstOrDefault(x => x.Id==id);
                return (xx==null) ? "":xx.Name;
-               
+            }
+            protected string GetBranchfromList(string id)
+            {
+               Branche xx= branchList.FirstOrDefault(x => x.Id==id);
+               return (xx==null) ? "":xx.Name;
             }
             // void ExportToExcel()
             // {

@@ -73,7 +73,7 @@ else
                 </th>    
                 <th >
                     <input style="width:70%" type='text' placeholder="Anmeldung search" bind=@searchstr/>   
-                    <button class="my-btn btn-primary" onclick=@( () => Filter("etrydate") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                    <button class="my-btn btn-primary" onclick=@( () => Filter("entrydate") )><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
                 </th>                    
                 <th>
                     <input style="width:70%" type='text' placeholder="Ar. klasse" bind=@searchstr/>   
@@ -153,7 +153,7 @@ else
                 }
                     <tr style=@str>
                     <td>@emp.Name </td>    
-                    <td>@emp.Branch           </td>    
+                    <td>@GetBranchfromList(emp.Branch)           </td>    
                     <td>@emp.Birthday         </td>    
                     <td>@emp.EntryDate        </td>                       
                     <td>@GetarClassfromList(emp.arClass)         </td>  
@@ -198,7 +198,7 @@ else
                                     <option value="">-- Zweig auswählen --</option>
                                     @foreach (var city in branchList)
                                     {
-                                        <option value="@city.Name">@city.Name</option>
+                                        <option value="@city.Id">@city.Name</option>
                                     }
                                 </select>
                             </div>
@@ -262,6 +262,7 @@ else
                     </div>
                     <div class="modal-footer" >
                         <button class="btn btn-block btn-success" onclick="@(async () => await SaveStudent())" data-dismiss="modal">Speichern</button>
+                        <button class="btn btn-block btn-success" onclick="@(async () =>{ stud.Id=null; await SaveStudent();})" data-dismiss="modal">Speichern Neu</button>
                     </div>
                     
                 </div>
